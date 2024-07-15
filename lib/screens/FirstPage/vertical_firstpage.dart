@@ -16,16 +16,20 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          double minHeight = 600.0;
-          double minWidth = 300.0;
+          double screenHeight = MediaQuery.of(context).size.height;
+          double screenWidth = MediaQuery.of(context).size.width;
+          double plusscreen = screenHeight + screenWidth;
+          double necscreen = screenHeight - screenWidth;
+          double necscreenabs = necscreen.abs();
 
-          double screenHeight = constraints.maxHeight < minHeight ? minHeight : constraints.maxHeight;
-          double screenWidth = constraints.maxWidth < minWidth ? minWidth : constraints.maxWidth;
-
-          double baseFontSize = screenWidth * 0.1;
+          print('screenHeight : ${screenHeight}');
+          print('screenWidth : ${screenWidth}');
+          print('plusscreen : ${plusscreen}');
+          print('necscreen : ${necscreen}');
+          print('necscreenabs : ${necscreenabs}');
+          print('new : ${screenHeight - necscreenabs}');
 
           return Stack(
             children: [
@@ -33,9 +37,59 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                 bottom: -35,
                 right: 0,
                 left: 0,
-                child: Image.asset(
-                  'assets/gif/backgroud_app2.gif',
-                  fit: BoxFit.cover,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/gif/backgroud_app2.gif',
+                      fit: BoxFit.fitHeight,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: 10,
+                          height: (screenHeight - necscreen) * 0.5,
+                          color: Colors.amber,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  Icon(
+                                    Icons.restaurant,
+                                    color: Colors.white,
+                                    size: plusscreen * 0.02,
+                                  ),
+                                  Text(
+                                    'Soi Siam',
+                                    style: GoogleFonts.rasa(
+                                      fontSize: plusscreen * 0.02,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Restaurant',
+                                    style: GoogleFonts.rasa(
+                                      fontSize: plusscreen * 0.02,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                width: plusscreen * 0.015,
+                                height: 10,
+                                color: Colors.amber,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               Positioned(
@@ -49,40 +103,14 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: screenHeight * 0.13,
-                right: screenWidth * 0.42,
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.restaurant,
-                      color: Colors.white,
-                      size: screenWidth * 0.045,
-                    ),
-                    Text(
-                      'Soi Siam',
-                      style: GoogleFonts.rasa(
-                        fontSize: screenWidth * 0.045,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      'Restaurant',
-                      style: GoogleFonts.rasa(
-                        fontSize: screenWidth * 0.045,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     height: 60,
                     width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -92,7 +120,9 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                             Navigator.pushReplacement(
                               context,
                               PageRouteBuilder(
-                                pageBuilder: (context, animation1, animation2) => const SecondPage(),
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        const SecondPage(),
                                 transitionDuration: const Duration(seconds: 0),
                                 maintainState: false,
                               ),
@@ -113,19 +143,19 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight * 0.05,
+                    height: plusscreen * 0.05,
                   ),
                   Text(
                     'Self-Service',
                     style: GoogleFonts.rasa(
-                      fontSize: baseFontSize,
+                      fontSize: plusscreen * 0.05,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'Experience.',
                     style: GoogleFonts.rasa(
-                      fontSize: baseFontSize,
+                      fontSize: plusscreen * 0.05,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -135,7 +165,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                   Text(
                     'From self-order and self-checkout',
                     style: GoogleFonts.roboto(
-                      fontSize: screenWidth * 0.03,
+                      fontSize: plusscreen * 0.013,
                       color: const Color(0xFF7D7D7D),
                       fontWeight: FontWeight.bold,
                     ),
@@ -144,17 +174,14 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 25,
-                        width: 25,
-                        child: ClipOval(
-                          child: SvgPicture.asset(
-                            'assets/svg/credit_card.svg',
+                      ClipOval(
+                        child: SvgPicture.asset('assets/svg/credit_card.svg',
                             fit: BoxFit.cover,
-                          ),
-                        ),
+                            height: plusscreen * 0.014,
+                            width: plusscreen * 0.014),
                       ),
                       const SizedBox(
                         width: 5,
@@ -162,11 +189,9 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       Text(
                         'Accept only Credit Card',
                         style: GoogleFonts.roboto(
-                          fontSize: screenWidth * 0.03,
+                          fontSize: plusscreen * 0.013,
                           color: const Color(0xFFEB5757),
                           fontWeight: FontWeight.bold,
-                          // decoration: TextDecoration.underline,
-                          // decorationColor: Colors.redAccent,
                         ),
                       ),
                     ],
@@ -178,12 +203,13 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const MenuPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const MenuPage()),
                       );
                     },
                     child: Container(
-                      height: 60,
-                      width: 200,
+                      height: screenHeight * 0.1,
+                      width: screenWidth * 0.3,
                       decoration: BoxDecoration(
                         color: const Color(0xFF496EE2),
                         borderRadius: BorderRadius.circular(10),
@@ -192,14 +218,13 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                         child: Text(
                           'Tap to Order',
                           style: GoogleFonts.roboto(
-                            fontSize: screenWidth * 0.03,
+                            fontSize: plusscreen * 0.013,
                             color: Colors.white,
                           ),
                         ),
                       ),
                     ),
                   ),
-              
                 ],
               ),
             ],
