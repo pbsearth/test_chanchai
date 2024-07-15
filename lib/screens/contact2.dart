@@ -10,12 +10,13 @@ class Contact2 extends StatefulWidget {
 }
 
 class _Contact2State extends State<Contact2> {
- @override
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     // double plusscreen = screenHeight + screenWidth;
     double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
+    double plusscreen = screenHeight + screenWidth;
 
     // double fontPlus = plusscreen * 0.1;
     double fontPlus2 = plusscreen2 * 2;
@@ -25,7 +26,7 @@ class _Contact2State extends State<Contact2> {
         showModalBottomSheet(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height * 0.2,
+            maxHeight: MediaQuery.of(context).size.height * 0.35,
           ),
           context: context,
           builder: (BuildContext context) {
@@ -72,36 +73,36 @@ class _Contact2State extends State<Contact2> {
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/phone_icon.png',
-                                          height: 12,
-                                          width: 12,
+                                          height: plusscreen * 0.012,
+                                          width: plusscreen * 0.012,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 7,
+                                      SizedBox(
+                                        height: plusscreen * 0.005,
                                       ),
                                       SvgPicture.asset(
                                         'assets/svg/instagram_icon.svg',
-                                        height: 22,
-                                        width: 22,
+                                        height: plusscreen * 0.012,
+                                        width: plusscreen * 0.012,
                                       ),
-                                      const SizedBox(
-                                        height: 7,
+                                      SizedBox(
+                                        height: plusscreen * 0.005,
                                       ),
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/youtube_icon.png',
-                                          height: 14,
-                                          width: 14,
+                                          height: plusscreen * 0.012,
+                                          width: plusscreen * 0.012,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 7,
+                                      SizedBox(
+                                        height: plusscreen * 0.005,
                                       ),
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/mail_icon.png',
-                                          height: 14,
-                                          width: 14,
+                                          height: plusscreen * 0.012,
+                                          width: plusscreen * 0.012,
                                         ),
                                       ),
                                     ],
@@ -150,17 +151,19 @@ class _Contact2State extends State<Contact2> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         '© Copyright 2022 l Powered by',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 1 + fontPlus2 * 0.025),
                       ),
-                      const SizedBox(
-                        width: 5,
+                      SizedBox(
+                        width: plusscreen * 0.005,
                       ),
                       Image.asset(
                         'assets/image/smile_icon.png',
-                        height: 35,
-                        width: 35,
+                        height: plusscreen * 0.02,
+                        width: plusscreen * 0.02,
                       ),
                     ],
                   ),
@@ -200,9 +203,14 @@ class CustomTextStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
+    double fontPlus2 = plusscreen2 * 2;
     return Text(
       label,
-      style: GoogleFonts.roboto(color: Colors.white, fontSize: 9),
+      style: GoogleFonts.roboto(
+          color: Colors.white, fontSize: 1 + fontPlus2 * 0.02),
     );
   }
 }

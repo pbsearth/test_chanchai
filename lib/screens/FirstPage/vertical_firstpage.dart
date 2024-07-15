@@ -56,7 +56,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                         children: [
                           SizedBox(
                             width: 10,
-                            height: (screenHeight - necscreen) * 0.5,
+                            height: (screenHeight - necscreen) * 0.57,
                             // color: Colors.amber,
                           ),
                           SizedBox(
@@ -70,19 +70,19 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                                     Icon(
                                       Icons.restaurant,
                                       color: Colors.white,
-                                      size: 1 + fontPlus2 * 0.1,
+                                      size: 1 + fontPlus2 * 0.06,
                                     ),
                                     Text(
                                       'Soi Siam',
                                       style: GoogleFonts.rasa(
-                                        fontSize: 1 + fontPlus2 * 0.1,
+                                        fontSize: 1 + fontPlus2 * 0.06,
                                         color: Colors.white,
                                       ),
                                     ),
                                     Text(
                                       'Restaurant',
                                       style: GoogleFonts.rasa(
-                                        fontSize: 1 + fontPlus2 * 0.1,
+                                        fontSize: 1 + fontPlus2 * 0.06,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -159,49 +159,49 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                     Text(
                       'Self-Service',
                       style: GoogleFonts.rasa(
-                        fontSize: plusscreen * 0.05,
+                        fontSize: plusscreen * 0.037,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       'Experience.',
                       style: GoogleFonts.rasa(
-                        fontSize: plusscreen * 0.05,
+                        fontSize: plusscreen * 0.037,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(
-                      height: plusscreen * 0.02,
+                      height: plusscreen * 0.0035,
                     ),
                     Text(
                       'From self-order and self-checkout',
                       style: GoogleFonts.roboto(
-                        fontSize: plusscreen * 0.013,
+                        fontSize: plusscreen * 0.0115,
                         color: const Color(0xFF7D7D7D),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(
-                      height: plusscreen * 0.01,
+                      height: plusscreen * 0.0035,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ClipOval(
                           child: SvgPicture.asset('assets/svg/credit_card.svg',
                               fit: BoxFit.cover,
-                              height: plusscreen * 0.014,
-                              width: plusscreen * 0.014),
+                              height: plusscreen * 0.0115,
+                              width: plusscreen * 0.0115),
                         ),
                         SizedBox(
-                          width: plusscreen * 0.01,
+                          width: plusscreen * 0.005,
                         ),
                         Flexible(
                           child: Text(
                             'Accept only Credit Card',
                             style: GoogleFonts.roboto(
-                                fontSize: plusscreen * 0.013,
+                                fontSize: plusscreen * 0.0115,
                                 color: const Color(0xFFEB5757),
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -211,7 +211,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       ],
                     ),
                     SizedBox(
-                      height: plusscreen * 0.04,
+                      height: plusscreen * 0.02,
                     ),
                     InkWell(
                       onTap: () {
@@ -222,7 +222,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                         );
                       },
                       child: Container(
-                        height: plusscreen * 0.05,
+                        height: plusscreen * 0.045,
                         width: plusscreen * 0.15,
                         decoration: BoxDecoration(
                           color: const Color(0xFF496EE2),
@@ -240,7 +240,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       ),
                     ),
                     SizedBox(
-                      height: fontPlus * 2.5,
+                      height: fontPlus * 3.25,
                     )
                   ],
                 ),

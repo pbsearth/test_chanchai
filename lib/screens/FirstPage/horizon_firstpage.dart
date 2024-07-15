@@ -16,7 +16,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Colors.white,
+      backgroundColor: Colors.white,
       body: LayoutBuilder(builder: (context, constraints) {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
@@ -67,7 +67,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                             child: const Contact2(),
                           ),
                           SizedBox(
-                            height: plusscreen * 0.035,
+                            height: plusscreen * 0.025,
                           ),
                           Text(
                             'Self-Service',
@@ -84,7 +84,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                             ),
                           ),
                           SizedBox(
-                            height: plusscreen * 0.01,
+                            height: plusscreen * 0.005,
                           ),
                           Text(
                             'From self-order and self-checkout',
@@ -94,12 +94,12 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: plusscreen * 0.002,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               ClipOval(
                                 child: SvgPicture.asset(
@@ -109,7 +109,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                                     width: plusscreen * 0.01),
                               ),
                               SizedBox(
-                                width: plusscreen * 0.01,
+                                width: plusscreen * 0.005,
                               ),
                               Flexible(
                                 child: Text(
@@ -119,14 +119,13 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                                       color: const Color(0xFFEB5757),
                                       fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.underline,
-                                      decorationColor:
-                                          const Color(0xFFEB5757)),
+                                      decorationColor: const Color(0xFFEB5757)),
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: plusscreen * 0.03,
+                            height: plusscreen * 0.02,
                           ),
                           InkWell(
                             onTap: () {
