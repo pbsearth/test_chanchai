@@ -16,16 +16,17 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
-      // backgroundColor: Colors.amberAccent,
+      backgroundColor:  Colors.white,
       body: LayoutBuilder(builder: (context, constraints) {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
         double plusscreen = screenHeight + screenWidth;
-        // double necscreen = screenHeight - screenWidth;
+        double necscreen = screenHeight - screenWidth;
+
         double fontPlus = plusscreen * 0.1;
         // double necscreenabs = necscreen.abs();
-
+        double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
+        double fontPlus2 = plusscreen2 * 2;
         // print('screenHeight : ${screenHeight}');
         // print('screenWidth : ${screenWidth}');
         // print('plusscreen : ${plusscreen}');
@@ -40,22 +41,23 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
             children: [
               Expanded(
                 flex: 7,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: SizedBox(
-                        height: plusscreen * 0.32,
-                        child: Image.asset(
-                          'assets/image/vector_backgroud3.png',
-                          fit: BoxFit.cover,
+                child: Positioned(
+                  top: 10,
+                  left: 0,
+                  bottom: 0,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 70,
+                        child: SizedBox(
+                          height: plusscreen * 0.32,
+                          child: Image.asset(
+                            'assets/image/vector_backgroud3.png',
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      color: Colors.blueAccent,
-                      child: Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
@@ -117,7 +119,8 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                                       color: const Color(0xFFEB5757),
                                       fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.underline,
-                                      decorationColor: const Color(0xFFEB5757)),
+                                      decorationColor:
+                                          const Color(0xFFEB5757)),
                                 ),
                               ),
                             ],
@@ -151,52 +154,109 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: plusscreen * 0.1,
+                          ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Expanded(
                 flex: 9,
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      'assets/gif/backgroud_app2.gif',
-                      fit: BoxFit.cover,
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) =>
-                                  const SecondPage(),
-                              transitionDuration: const Duration(seconds: 0),
-                              maintainState: false,
+                child: Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        'assets/gif/backgroud_app2.gif',
+                        fit: BoxFit.fill,
+                        scale: fontPlus * 0.005,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                            height: (screenHeight - necscreen) * 0.34,
+                            // color: Colors.amber,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.restaurant,
+                                      color: Colors.white,
+                                      size: 1 + fontPlus2 * 0.035,
+                                    ),
+                                    SizedBox(
+                                      width: plusscreen * 0.005,
+                                      // color: Colors.amber,
+                                    ),
+                                    Text(
+                                      'Soi Siam',
+                                      style: GoogleFonts.rasa(
+                                        fontSize: 1 + fontPlus2 * 0.035,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: plusscreen * 0.01,
+                                  height: 10,
+                                  // color: Colors.amber,
+                                )
+                              ],
                             ),
-                          );
-                        },
-                        child: Flexible(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: fontPlus * 0.1,
-                                horizontal: fontPlus * 0.15),
-                            height: 2 + fontPlus * 0.13,
-                            width: 2 + fontPlus * 0.13,
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/image/usa_flag_new.png',
-                                fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const SecondPage(),
+                                    transitionDuration:
+                                        const Duration(seconds: 0),
+                                    maintainState: false,
+                                  ),
+                                );
+                              },
+                              child: Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: fontPlus * 0.1,
+                                      horizontal: fontPlus * 0.15),
+                                  height: 2 + fontPlus * 0.13,
+                                  width: 2 + fontPlus * 0.13,
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/image/usa_flag_new.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

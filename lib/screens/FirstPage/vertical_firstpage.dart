@@ -16,7 +16,8 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
+      // backgroundColor: const Color(0xFFFBFBFB),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: LayoutBuilder(
