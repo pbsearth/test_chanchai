@@ -2,11 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ContactBottomsheet extends StatelessWidget {
+class ContactBottomsheet extends StatefulWidget {
   const ContactBottomsheet({super.key});
 
   @override
+  State<ContactBottomsheet> createState() => _ContactBottomsheetState();
+}
+
+class _ContactBottomsheetState extends State<ContactBottomsheet> {
+  @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen = screenHeight + screenWidth;
+    double fontPlus = plusscreen * 0.1;
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -124,7 +133,6 @@ class ContactBottomsheet extends StatelessWidget {
                                         CustomTextStyle(
                                           label: "SoiSiam@gmail.co.th",
                                         ),
-                               
                                       ],
                                     )
                                   ],
@@ -162,18 +170,18 @@ class ContactBottomsheet extends StatelessWidget {
       },
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.restaurant,
             color: Color(0xFF7D7D7D),
-            size: 20,
+            size: 3 + fontPlus * 0.15,
           ),
-          const SizedBox(
-            width: 5,
+           SizedBox(
+            width: screenWidth * 0.02,
           ),
           Text(
             'Soi Siam',
             style: GoogleFonts.roboto(
-                fontSize: 18,
+                fontSize: 3 + fontPlus * 0.15,
                 color: Color(0xFF7D7D7D),
                 fontWeight: FontWeight.bold),
           ),
