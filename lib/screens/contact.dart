@@ -14,8 +14,12 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    double plusscreen = screenHeight + screenWidth;
-    double fontPlus = plusscreen * 0.1;
+    // double plusscreen = screenHeight + screenWidth;
+    double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
+
+    // double fontPlus = plusscreen * 0.1;
+    double fontPlus2 = plusscreen2 * 2;
+
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -56,89 +60,87 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                         ),
                         Expanded(
                           flex: 4,
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ClipOval(
-                                          child: Image.asset(
-                                            'assets/image/phone_icon.png',
-                                            height: 12,
-                                            width: 12,
-                                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ClipOval(
+                                        child: Image.asset(
+                                          'assets/image/phone_icon.png',
+                                          height: 12,
+                                          width: 12,
                                         ),
-                                        const SizedBox(
-                                          height: 7,
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      SvgPicture.asset(
+                                        'assets/svg/instagram_icon.svg',
+                                        height: 22,
+                                        width: 22,
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      ClipOval(
+                                        child: Image.asset(
+                                          'assets/image/youtube_icon.png',
+                                          height: 14,
+                                          width: 14,
                                         ),
-                                        SvgPicture.asset(
-                                          'assets/svg/instagram_icon.svg',
-                                          height: 22,
-                                          width: 22,
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      ClipOval(
+                                        child: Image.asset(
+                                          'assets/image/mail_icon.png',
+                                          height: 14,
+                                          width: 14,
                                         ),
-                                        const SizedBox(
-                                          height: 7,
-                                        ),
-                                        ClipOval(
-                                          child: Image.asset(
-                                            'assets/image/youtube_icon.png',
-                                            height: 14,
-                                            width: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 7,
-                                        ),
-                                        ClipOval(
-                                          child: Image.asset(
-                                            'assets/image/mail_icon.png',
-                                            height: 14,
-                                            width: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    const Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomTextStyle(
-                                          label: "090-890-xxxx",
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomTextStyle(
-                                          label: "SoiSiam",
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomTextStyle(
-                                          label: "SoiSiam Chanal",
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CustomTextStyle(
-                                          label: "SoiSiam@gmail.co.th",
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  const Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomTextStyle(
+                                        label: "090-890-xxxx",
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomTextStyle(
+                                        label: "SoiSiam",
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomTextStyle(
+                                        label: "SoiSiam Chanal",
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomTextStyle(
+                                        label: "SoiSiam@gmail.co.th",
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -172,18 +174,18 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
         children: [
           Icon(
             Icons.restaurant,
-            color: Color(0xFF7D7D7D),
-            size: 3 + fontPlus * 0.15,
+            color: const Color(0xFF7D7D7D),
+            size: 1 + fontPlus2 * 0.05,
           ),
-           SizedBox(
-            width: screenWidth * 0.02,
+          SizedBox(
+            width: screenWidth * 0.01,
           ),
           Text(
             'Soi Siam',
             style: GoogleFonts.roboto(
-                fontSize: 3 + fontPlus * 0.15,
-                color: Color(0xFF7D7D7D),
-                fontWeight: FontWeight.bold),
+              fontSize: 1 + fontPlus2 * 0.05,
+              color: const Color(0xFF7D7D7D),
+            ),
           ),
         ],
       ),

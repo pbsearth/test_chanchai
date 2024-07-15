@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:test_flutter/check_display.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -33,9 +34,17 @@ class _MenuPageState extends State<MenuPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  const OrientationExample(),
+                              transitionDuration: const Duration(seconds: 0),
+                              maintainState: false,
+                            ),
+                          );
+                        },
                           child: Container(
                             margin: const EdgeInsets.fromLTRB(10, 20, 0, 10),
                             width: 70,

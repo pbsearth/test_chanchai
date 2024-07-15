@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/screens/SecoundPage/second_page.dart';
-import 'package:test_flutter/screens/contact.dart';
 import 'package:test_flutter/screens/contact2.dart';
 import 'package:test_flutter/screens/menu_page.dart';
 
@@ -17,173 +16,191 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFBFBFB),
+      // backgroundColor: Colors.amberAccent,
       body: LayoutBuilder(builder: (context, constraints) {
-        double minHeight = 600.0;
-        double minWidth = 300.0;
+        double screenHeight = MediaQuery.of(context).size.height;
+        double screenWidth = MediaQuery.of(context).size.width;
+        double plusscreen = screenHeight + screenWidth;
+        // double necscreen = screenHeight - screenWidth;
+        double fontPlus = plusscreen * 0.1;
+        // double necscreenabs = necscreen.abs();
 
-        double screenHeight = constraints.maxHeight < minHeight
-            ? minHeight
-            : constraints.maxHeight;
-        double screenWidth =
-            constraints.maxWidth < minWidth ? minWidth : constraints.maxWidth;
+        // print('screenHeight : ${screenHeight}');
+        // print('screenWidth : ${screenWidth}');
+        // print('plusscreen : ${plusscreen}');
+        // print('necscreen : ${necscreen}');
+        // print('necscreenabs : ${necscreenabs}');
+        // print('new : ${screenHeight - necscreenabs}');
 
-        double baseFontSize = screenWidth * 0.1;
-        return Stack(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        return SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 7,
+                child: Stack(
                   children: [
-                    // Container(
-                    //   height: 60,
-                    //   width: double.infinity,
-                    //   margin: const EdgeInsets.symmetric(
-                    //       horizontal: 30, vertical: 20),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       const ContactBottomsheet(),
-                    //       InkWell(
-                    //         onTap: () {
-                    //           Navigator.pushReplacement(
-                    //             context,
-                    //             PageRouteBuilder(
-                    //               pageBuilder:
-                    //                   (context, animation1, animation2) =>
-                    //                       const SecondPage(),
-                    //               transitionDuration:
-                    //                   const Duration(seconds: 0),
-                    //               maintainState: false,
-                    //             ),
-                    //           );
-                    //         },
-                    //         child: SizedBox(
-                    //           height: 20,
-                    //           width: 20,
-                    //           child: ClipOval(
-                    //             child: Image.asset(
-                    //               'assets/image/flag_usa.png',
-                    //               fit: BoxFit.cover,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    SizedBox(
-                      height: screenHeight * 0.05,
-                    ),
-                    Text(
-                      'Self-Service',
-                      style: GoogleFonts.rasa(
-                        fontSize: baseFontSize,
-                        fontWeight: FontWeight.bold,
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      child: SizedBox(
+                        height: plusscreen * 0.32,
+                        child: Image.asset(
+                          'assets/image/vector_backgroud3.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Experience.',
-                      style: GoogleFonts.rasa(
-                        fontSize: baseFontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      'From self-order and self-checkout',
-                      style: GoogleFonts.roboto(
-                        fontSize: screenWidth * 0.03,
-                        color: const Color(0xFF7D7D7D),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: ClipOval(
-                            child: SvgPicture.asset(
-                              'assets/svg/credit_card.svg',
-                              fit: BoxFit.cover,
+                    Container(
+                      color: Colors.blueAccent,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: fontPlus * 0.1,
+                                horizontal: fontPlus * 0.15),
+                            child: const Contact2(),
+                          ),
+                          SizedBox(
+                            height: plusscreen * 0.035,
+                          ),
+                          Text(
+                            'Self-Service',
+                            style: GoogleFonts.rasa(
+                              fontSize: plusscreen * 0.035,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Accept only Credit Card',
-                          style: GoogleFonts.roboto(
-                            fontSize: screenWidth * 0.03,
-                            color: const Color(0xFFEB5757),
-                            fontWeight: FontWeight.bold,
-                            // decoration: TextDecoration.underline,
-                            // decorationColor: Colors.redAccent,
+                          Text(
+                            'Experience.',
+                            style: GoogleFonts.rasa(
+                              fontSize: plusscreen * 0.035,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MenuPage()),
-                        );
-                      },
-                      child: Container(
-                        height: 60,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF496EE2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Tap to Order',
+                          SizedBox(
+                            height: plusscreen * 0.01,
+                          ),
+                          Text(
+                            'From self-order and self-checkout',
                             style: GoogleFonts.roboto(
-                              fontSize: screenWidth * 0.03,
-                              color: Colors.white,
+                              fontSize: plusscreen * 0.01,
+                              color: const Color(0xFF7D7D7D),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipOval(
+                                child: SvgPicture.asset(
+                                    'assets/svg/credit_card.svg',
+                                    fit: BoxFit.cover,
+                                    height: plusscreen * 0.01,
+                                    width: plusscreen * 0.01),
+                              ),
+                              SizedBox(
+                                width: plusscreen * 0.01,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  'Accept only Credit Card',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: plusscreen * 0.01,
+                                      color: const Color(0xFFEB5757),
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: const Color(0xFFEB5757)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: plusscreen * 0.03,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MenuPage()),
+                              );
+                            },
+                            child: Container(
+                              height: plusscreen * 0.045,
+                              width: plusscreen * 0.15,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF496EE2),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Tap to Order',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: plusscreen * 0.013,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-                Container(
-                  child: Image.asset(
-                    'assets/gif/backgroud_app2.gif',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: SizedBox(
-                height: screenHeight * 0.65,
-                child: Image.asset(
-                  'assets/image/vector_backgroud3.png',
-                  fit: BoxFit.cover,
+              ),
+              Expanded(
+                flex: 9,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/gif/backgroud_app2.gif',
+                      fit: BoxFit.cover,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  const SecondPage(),
+                              transitionDuration: const Duration(seconds: 0),
+                              maintainState: false,
+                            ),
+                          );
+                        },
+                        child: Flexible(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: fontPlus * 0.1,
+                                horizontal: fontPlus * 0.15),
+                            height: 2 + fontPlus * 0.13,
+                            width: 2 + fontPlus * 0.13,
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/image/usa_flag_new.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       }),
     );

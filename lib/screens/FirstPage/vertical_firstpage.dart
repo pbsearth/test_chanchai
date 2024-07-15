@@ -16,7 +16,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
+      backgroundColor: const Color(0xFFFBFBFB),
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: LayoutBuilder(
@@ -26,14 +26,18 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
             double plusscreen = screenHeight + screenWidth;
             double necscreen = screenHeight - screenWidth;
             double fontPlus = plusscreen * 0.1;
-            double necscreenabs = necscreen.abs();
+            double plusscreen2 =
+                screenHeight + (screenWidth * 0.3 - screenHeight);
+            double fontPlus2 = plusscreen2 * 2;
 
-            print('screenHeight : ${screenHeight}');
-            print('screenWidth : ${screenWidth}');
-            print('plusscreen : ${plusscreen}');
-            print('necscreen : ${necscreen}');
-            print('necscreenabs : ${necscreenabs}');
-            print('new : ${screenHeight - necscreenabs}');
+            // double necscreenabs = necscreen.abs();
+
+            // print('screenHeight : ${screenHeight}');
+            // print('screenWidth : ${screenWidth}');
+            // print('plusscreen : ${plusscreen}');
+            // print('necscreen : ${necscreen}');
+            // print('necscreenabs : ${necscreenabs}');
+            // print('new : ${screenHeight - necscreenabs}');
 
             return Stack(
               children: [
@@ -49,12 +53,12 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       ),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 10,
                             height: (screenHeight - necscreen) * 0.5,
                             // color: Colors.amber,
                           ),
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -65,26 +69,26 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                                     Icon(
                                       Icons.restaurant,
                                       color: Colors.white,
-                                      size: 3 + fontPlus * 0.15,
+                                      size: 1 + fontPlus2 * 0.1,
                                     ),
                                     Text(
                                       'Soi Siam',
                                       style: GoogleFonts.rasa(
-                                        fontSize: 3 + fontPlus * 0.15,
+                                        fontSize: 1 + fontPlus2 * 0.1,
                                         color: Colors.white,
                                       ),
                                     ),
                                     Text(
                                       'Restaurant',
                                       style: GoogleFonts.rasa(
-                                        fontSize: 3 + fontPlus * 0.15,
+                                        fontSize: 1 + fontPlus2 * 0.1,
                                         color: Colors.white,
                                       ),
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  width: plusscreen * 0.015,
+                                SizedBox(
+                                  width: plusscreen * 0.01,
                                   height: 10,
                                   // color: Colors.amber,
                                 )
@@ -108,15 +112,11 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                   ),
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: plusscreen * 0.05,
-                      // color: Colors.amber,
-                      width: double.infinity,
                       margin: EdgeInsets.symmetric(
-                        horizontal: plusscreen * 0.01,
-                        vertical: plusscreen * 0.01,
+                        horizontal: fontPlus * 0.2,
+                        vertical: fontPlus * 0.2,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,13 +136,15 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                                 ),
                               );
                             },
-                            child: SizedBox(
-                              height: 3 + fontPlus * 0.15,
-                              width: 3 + fontPlus * 0.15,
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/image/flag_usa.png',
-                                  fit: BoxFit.cover,
+                            child: Flexible(
+                              child: SizedBox(
+                                height: 2 + fontPlus * 0.15,
+                                width: 2 + fontPlus * 0.15,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    'assets/image/usa_flag_new.png',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -198,10 +200,11 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                           child: Text(
                             'Accept only Credit Card',
                             style: GoogleFonts.roboto(
-                              fontSize: plusscreen * 0.013,
-                              color: const Color(0xFFEB5757),
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontSize: plusscreen * 0.013,
+                                color: const Color(0xFFEB5757),
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                decorationColor: const Color(0xFFEB5757)),
                           ),
                         ),
                       ],
@@ -218,8 +221,8 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                         );
                       },
                       child: Container(
-                        height: screenHeight * 0.07,
-                        width: screenWidth * 0.45,
+                        height: plusscreen * 0.05,
+                        width: plusscreen * 0.15,
                         decoration: BoxDecoration(
                           color: const Color(0xFF496EE2),
                           borderRadius: BorderRadius.circular(5),

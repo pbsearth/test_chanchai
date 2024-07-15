@@ -2,58 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Contact2 extends StatelessWidget {
+class Contact2 extends StatefulWidget {
   const Contact2({Key? key});
 
   @override
+  State<Contact2> createState() => _Contact2State();
+}
+
+class _Contact2State extends State<Contact2> {
+ @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    double screenWidth = MediaQuery.of(context).size.width;
+    // double plusscreen = screenHeight + screenWidth;
+    double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
+
+    // double fontPlus = plusscreen * 0.1;
+    double fontPlus2 = plusscreen2 * 2;
 
     return InkWell(
       onTap: () {
         showModalBottomSheet(
-          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+            maxHeight: MediaQuery.of(context).size.height * 0.2,
+          ),
           context: context,
           builder: (BuildContext context) {
             return Container(
               color: const Color(0xFF212121),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      screenHeight * 0.04,
-                      screenHeight * 0.05,
-                      screenHeight * 0.04,
-                      screenHeight * 0.01),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(
+                          flex: 6,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomTextStyle(
-                                label: "ติดต่อเรา",
-                                fontSize: 18.0 * textScaleFactor,
+                                label: "Contact Us",
                               ),
                               SizedBox(
-                                height: screenHeight * 0.01,
+                                height: 10,
                               ),
                               CustomTextStyle(
                                 label:
-                                    "28 ซอยรัตนาธิเบศร์ 28 แขวงบางกระสอ เขตเมืองนนทบุรี จังหวัดนนทบุรี 11000",
-                                fontSize: 12.0 * textScaleFactor,
+                                    "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: Container(
+                        Expanded(
+                          flex: 4,
                           child: Column(
                             children: [
                               Row(
@@ -66,8 +72,8 @@ class Contact2 extends StatelessWidget {
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/phone_icon.png',
-                                          height: screenHeight * 0.015,
-                                          width: screenHeight * 0.015,
+                                          height: 12,
+                                          width: 12,
                                         ),
                                       ),
                                       const SizedBox(
@@ -75,8 +81,8 @@ class Contact2 extends StatelessWidget {
                                       ),
                                       SvgPicture.asset(
                                         'assets/svg/instagram_icon.svg',
-                                        height: screenHeight * 0.03,
-                                        width: screenHeight * 0.03,
+                                        height: 22,
+                                        width: 22,
                                       ),
                                       const SizedBox(
                                         height: 7,
@@ -84,8 +90,8 @@ class Contact2 extends StatelessWidget {
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/youtube_icon.png',
-                                          height: screenHeight * 0.018,
-                                          width: screenHeight * 0.018,
+                                          height: 14,
+                                          width: 14,
                                         ),
                                       ),
                                       const SizedBox(
@@ -94,8 +100,8 @@ class Contact2 extends StatelessWidget {
                                       ClipOval(
                                         child: Image.asset(
                                           'assets/image/mail_icon.png',
-                                          height: screenHeight * 0.018,
-                                          width: screenHeight * 0.018,
+                                          height: 14,
+                                          width: 14,
                                         ),
                                       ),
                                     ],
@@ -103,7 +109,7 @@ class Contact2 extends StatelessWidget {
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                   Column(
+                                  const Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
@@ -111,31 +117,24 @@ class Contact2 extends StatelessWidget {
                                     children: [
                                       CustomTextStyle(
                                         label: "090-890-xxxx",
-                                        fontSize: 10.0 * textScaleFactor,
                                       ),
                                       SizedBox(
-                                        height: screenHeight * 0.01,
+                                        height: 10,
                                       ),
                                       CustomTextStyle(
                                         label: "SoiSiam",
-                                        fontSize: 10.0 * textScaleFactor,
                                       ),
                                       SizedBox(
-                                        height: screenHeight * 0.01,
+                                        height: 10,
                                       ),
                                       CustomTextStyle(
-                                        label: "SoiSiam Channel",
-                                        fontSize: 10.0 * textScaleFactor,
+                                        label: "SoiSiam Chanal",
                                       ),
                                       SizedBox(
-                                        height: screenHeight * 0.01,
+                                        height: 10,
                                       ),
                                       CustomTextStyle(
                                         label: "SoiSiam@gmail.co.th",
-                                        fontSize: 10.0 * textScaleFactor,
-                                      ),
-                                      SizedBox(
-                                        height: screenHeight * 0.01,
                                       ),
                                     ],
                                   )
@@ -144,10 +143,28 @@ class Contact2 extends StatelessWidget {
                             ],
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        '© Copyright 2022 l Powered by',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset(
+                        'assets/image/smile_icon.png',
+                        height: 35,
+                        width: 35,
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
             );
           },
@@ -155,17 +172,20 @@ class Contact2 extends StatelessWidget {
       },
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.restaurant,
-            color: Colors.grey,
-            size: 20,
+            color: const Color(0xFF7D7D7D),
+            size: 0.5 + fontPlus2 * 0.03,
           ),
-          const SizedBox(
-            width: 5,
+          SizedBox(
+            width: screenWidth * 0.01,
           ),
           Text(
             'Soi Siam',
-            style: GoogleFonts.roboto(fontSize: 18.0 * textScaleFactor, color: Colors.grey),
+            style: GoogleFonts.roboto(
+              fontSize: 0.5 + fontPlus2 * 0.03,
+              color: const Color(0xFF7D7D7D),
+            ),
           ),
         ],
       ),
@@ -175,15 +195,14 @@ class Contact2 extends StatelessWidget {
 
 class CustomTextStyle extends StatelessWidget {
   final String label;
-  final double fontSize;
 
-  const CustomTextStyle({Key? key, required this.label, this.fontSize = 12.0});
+  const CustomTextStyle({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: GoogleFonts.roboto(color: Colors.white, fontSize: fontSize),
+      style: GoogleFonts.roboto(color: Colors.white, fontSize: 9),
     );
   }
 }
