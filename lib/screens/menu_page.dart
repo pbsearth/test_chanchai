@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:test_flutter/screens/bloc/bloc_foodlist/foodlist_bloc.dart';
+import 'package:test_flutter/screens/domain/domain_foodlist/models/model_food.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,9 +15,10 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   int selectedIndex = 0;
   int selectedIndex2 = 0;
-  int selectedIndex3 = -1; // Initial index to none selected
-  Set<String> selectedFoodIds = {}; // Set to store selected foodIds
-
+  int selectedIndex3 = -1;
+  // Set<String> selectedFoodIds = {};
+  List<String> selectedFoodIds = [];
+  List<Food> selectedFoodItems = [];
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -161,17 +163,21 @@ class _MenuPageState extends State<MenuPage> {
                                                 if (isSelected) {
                                                   selectedFoodIds
                                                       .remove(foodId);
+                                                  selectedFoodItems.removeWhere(
+                                                      (item) =>
+                                                          item.foodId ==
+                                                          foodId);
                                                 } else {
                                                   selectedFoodIds
                                                       .add(foodId.toString());
+                                                  selectedFoodItems.add(
+                                                      state.foodList[index]);
                                                 }
-                                                // Toggle selection
                                                 selectedIndex3 =
                                                     isSelected ? -1 : index;
                                               });
-                                              // Print food name
-                                              print(state
-                                                      .foodList[index].foodId ??
+                                              print(state.foodList[index]
+                                                      .foodName ??
                                                   'No Name');
                                             },
                                             child: Padding(
@@ -194,9 +200,9 @@ class _MenuPageState extends State<MenuPage> {
                                                       border: Border.all(
                                                         color: isSelected
                                                             ? const Color(
-                                                                0xFF02ccfe) // Selected border color
+                                                                0xFF02ccfe)
                                                             : Colors
-                                                                .transparent, // Default border color
+                                                                .transparent,
                                                         width: 3,
                                                       ),
                                                       image: state
@@ -231,7 +237,6 @@ class _MenuPageState extends State<MenuPage> {
                                                       color: isSelected
                                                           ? const Color(
                                                               0xFF02ccfe)
-                                                          // Selected border color
                                                           : Colors.amberAccent,
                                                       borderRadius:
                                                           const BorderRadius
@@ -260,7 +265,7 @@ class _MenuPageState extends State<MenuPage> {
                                         } else {
                                           return SizedBox(
                                             width: plusscreen * 0.1,
-                                          ); // Spacer for empty cell
+                                          );
                                         }
                                       },
                                     ),
@@ -292,15 +297,19 @@ class _MenuPageState extends State<MenuPage> {
                                                 if (isSelected) {
                                                   selectedFoodIds
                                                       .remove(foodId);
+                                                  selectedFoodItems.removeWhere(
+                                                      (item) =>
+                                                          item.foodId ==
+                                                          foodId);
                                                 } else {
                                                   selectedFoodIds
                                                       .add(foodId.toString());
+                                                  selectedFoodItems.add(
+                                                      state.foodList[index]);
                                                 }
-                                                // Toggle selection
                                                 selectedIndex3 =
                                                     isSelected ? -1 : index;
                                               });
-                                              // Print food name
                                               print(state.foodList[index]
                                                       .foodName ??
                                                   'No Name');
@@ -324,10 +333,9 @@ class _MenuPageState extends State<MenuPage> {
                                                       ),
                                                       border: Border.all(
                                                         color: isSelected
-                                                            ? Colors
-                                                                .blue // Selected border color
+                                                            ? Colors.blue
                                                             : Colors
-                                                                .transparent, // Default border color
+                                                                .transparent,
                                                         width: 3,
                                                       ),
                                                       image: state
@@ -387,7 +395,7 @@ class _MenuPageState extends State<MenuPage> {
                                         } else {
                                           return SizedBox(
                                             width: plusscreen * 0.1,
-                                          ); // Spacer for empty cell
+                                          );
                                         }
                                       },
                                     ),
@@ -455,7 +463,8 @@ class _MenuPageState extends State<MenuPage> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Divider(),
-                      )
+                      ),
+                      buildSelectedFoodList(),
                     ],
                   ),
                   Padding(
@@ -518,6 +527,38 @@ class _MenuPageState extends State<MenuPage> {
               )),
         ],
       ),
+    );
+  }
+
+  Widget buildSelectedFoodList() {
+    List<Widget> selectedFoodsWidgets = selectedFoodItems
+        .map((foodItem) => Padding(
+              padding: const EdgeInsets.all(5),
+              child: Container(
+                color: Colors.amber,
+                child: ListTile(
+                  title: Text(
+                    foodItem.foodName ?? 'No Name',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    '\$${foodItem.foodPrice}',
+                  ),
+                ),
+              ),
+            ))
+        .toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: selectedFoodsWidgets,
+        ),
+      ],
     );
   }
 
