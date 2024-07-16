@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Contact2 extends StatefulWidget {
-  const Contact2({Key? key});
+  const Contact2({super.key});
 
   @override
   State<Contact2> createState() => _Contact2State();
@@ -20,154 +20,194 @@ class _Contact2State extends State<Contact2> {
 
     // double fontPlus = plusscreen * 0.1;
     double fontPlus2 = plusscreen2 * 2;
+    double fontPlus3 = plusscreen2 * 5;
 
     return InkWell(
       onTap: () {
         showModalBottomSheet(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height * 0.35,
+            // maxHeight: MediaQuery.of(context).size.height * 0.183,
           ),
           context: context,
           builder: (BuildContext context) {
             return Container(
+              height: plusscreen * 0.12,
               color: const Color(0xFF212121),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Expanded(
-                          flex: 6,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomTextStyle(
-                                label: "Contact Us",
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextStyle(
-                                label:
-                                    "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(fontPlus3 * 0.02 * 1,
+                            fontPlus3 * 0.015 * 2, fontPlus3 * 0.02 * 1, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: Column(
                                 children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ClipOval(
-                                        child: Image.asset(
-                                          'assets/image/phone_icon.png',
-                                          height: plusscreen * 0.012,
-                                          width: plusscreen * 0.012,
+                                  SizedBox(
+                                    width: screenWidth * 0.4,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const CustomTextStyle(
+                                          label: "Contact Us",
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: plusscreen * 0.005,
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/svg/instagram_icon.svg',
-                                        height: plusscreen * 0.012,
-                                        width: plusscreen * 0.012,
-                                      ),
-                                      SizedBox(
-                                        height: plusscreen * 0.005,
-                                      ),
-                                      ClipOval(
-                                        child: Image.asset(
-                                          'assets/image/youtube_icon.png',
-                                          height: plusscreen * 0.012,
-                                          width: plusscreen * 0.012,
+                                        SizedBox(
+                                          height: 1 + fontPlus2 * 0.015,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: plusscreen * 0.005,
-                                      ),
-                                      ClipOval(
-                                        child: Image.asset(
-                                          'assets/image/mail_icon.png',
-                                          height: plusscreen * 0.012,
-                                          width: plusscreen * 0.012,
+                                        const CustomTextStyle(
+                                          label:
+                                              "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  const Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomTextStyle(
-                                        label: "090-890-xxxx",
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomTextStyle(
-                                        label: "SoiSiam",
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomTextStyle(
-                                        label: "SoiSiam Chanal",
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomTextStyle(
-                                        label: "SoiSiam@gmail.co.th",
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/svg/phone_icon.svg',
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
+                                          ),
+                                          SizedBox(
+                                            height: 1 + fontPlus2 * 0.02,
+                                          ),
+                                          SvgPicture.asset(
+                                            'assets/svg/instagram_icon.svg',
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
+                                          ),
+                                          SizedBox(
+                                            height: 1 + fontPlus2 * 0.02,
+                                          ),
+                                          SvgPicture.asset(
+                                            'assets/svg/youtube_icon.svg',
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
+                                          ),
+                                          SizedBox(
+                                            height: 1 + fontPlus2 * 0.02,
+                                          ),
+                                          SvgPicture.asset(
+                                            'assets/svg/mail_icon.svg',
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: screenWidth * 0.02,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "090-890-xxxx",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      1 + fontPlus2 * 0.015,
+                                                  color: Colors.white),
+                                              softWrap: true,
+                                              maxLines: null,
+                                            ),
+                                            SizedBox(
+                                              height: 1 + fontPlus2 * 0.02,
+                                            ),
+                                            Text(
+                                              "SoiSiam",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      1 + fontPlus2 * 0.015,
+                                                  color: Colors.white),
+                                              softWrap: true,
+                                              maxLines: null,
+                                            ),
+                                            SizedBox(
+                                              height: 1 + fontPlus2 * 0.02,
+                                            ),
+                                            Text(
+                                              "SoiSiam Chanal",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      1 + fontPlus2 * 0.015,
+                                                  color: Colors.white),
+                                              softWrap: true,
+                                              maxLines: null,
+                                            ),
+                                            SizedBox(
+                                              height: 1 + fontPlus2 * 0.02,
+                                            ),
+                                            Text(
+                                              "SoiSiam@gmail.co.th",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      1 + fontPlus2 * 0.015,
+                                                  color: Colors.white),
+                                              softWrap: true,
+                                              maxLines: null,
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '© Copyright 2022 l Powered by',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 1 + fontPlus2 * 0.025),
                       ),
-                      SizedBox(
-                        width: plusscreen * 0.005,
-                      ),
-                      Image.asset(
-                        'assets/image/smile_icon.png',
-                        height: plusscreen * 0.02,
-                        width: plusscreen * 0.02,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              '© Copyright 2022 l Powered by',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 1 + fontPlus2 * 0.02),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Image.asset(
+                            'assets/image/smile_icon.png',
+                            height: 10 + fontPlus2 * 0.03,
+                            width: 10 + fontPlus2 * 0.03,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             );
           },
@@ -210,7 +250,7 @@ class CustomTextStyle extends StatelessWidget {
     return Text(
       label,
       style: GoogleFonts.roboto(
-          color: Colors.white, fontSize: 1 + fontPlus2 * 0.02),
+          color: Colors.white, fontSize: 1 + fontPlus2 * 0.015),
     );
   }
 }

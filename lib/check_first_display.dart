@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter/screens/FirstPage/horizon_firstpage.dart';
 import 'package:test_flutter/screens/FirstPage/vertical_firstpage.dart';
 
-class OrientationExample extends StatefulWidget {
-  const OrientationExample({super.key});
+class OrientationFirstPage extends StatefulWidget {
+  const OrientationFirstPage({super.key});
 
   @override
-  _OrientationExampleState createState() => _OrientationExampleState();
+  _OrientationFirstPageState createState() => _OrientationFirstPageState();
 }
 
-class _OrientationExampleState extends State<OrientationExample> {
+class _OrientationFirstPageState extends State<OrientationFirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

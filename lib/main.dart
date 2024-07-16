@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/check_display.dart';
+import 'package:test_flutter/check_first_display.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: const OrientationExample(),
+      home: const OrientationFirstPage(),
     );
   }
 }
