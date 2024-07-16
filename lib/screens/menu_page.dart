@@ -366,11 +366,14 @@ class _MenuPageState extends State<MenuPage> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      color: Colors.amberAccent,
+                                                    decoration: BoxDecoration(
+                                                      color: isSelected
+                                                          ? const Color(
+                                                              0xFF02ccfe)
+                                                          : Colors.amberAccent,
                                                       borderRadius:
-                                                          BorderRadius.vertical(
+                                                          const BorderRadius
+                                                              .vertical(
                                                         bottom:
                                                             Radius.circular(10),
                                                       ),
