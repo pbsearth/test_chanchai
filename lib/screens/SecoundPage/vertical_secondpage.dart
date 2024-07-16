@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_flutter/screens/check_second_display.dart';
-import 'package:test_flutter/screens/FirstPage/contact_vertical_first.dart';
-import 'package:test_flutter/screens/menu_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test_flutter/screens/check_first_display.dart';
+import 'package:test_flutter/screens/SecoundPage/cantact_vertical_second.dart';
+import 'package:test_flutter/screens/SecoundPage/widget_secondpage.dart';
 
-class FirstPageVertical extends StatefulWidget {
-  const FirstPageVertical({super.key});
+class SecondPageVertical extends StatefulWidget {
+  const SecondPageVertical({super.key});
 
   @override
-  State<FirstPageVertical> createState() => _FristPageVerticalState();
+  State<SecondPageVertical> createState() => _SecondPageVerticalState();
 }
 
-class _FristPageVerticalState extends State<FirstPageVertical> {
+class _SecondPageVerticalState extends State<SecondPageVertical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,87 +24,20 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
             double screenHeight = MediaQuery.of(context).size.height;
             double screenWidth = MediaQuery.of(context).size.width;
             double plusscreen = screenHeight + screenWidth;
-            double necscreen = screenHeight - screenWidth;
             double fontPlus = plusscreen * 0.1;
             double plusscreen2 =
                 screenHeight + (screenWidth * 0.3 - screenHeight);
             double fontPlus2 = plusscreen2 * 2;
-            // double necscreenabs = necscreen.abs();
-            // print('screenHeight : ${screenHeight}');
-            // print('screenWidth : ${screenWidth}');
-            // print('plusscreen : ${plusscreen}');
-            // print('necscreen : ${necscreen}');
-            // print('necscreenabs : ${necscreenabs}');
-            // print('new : ${screenHeight - necscreenabs}');
 
             return Stack(
               children: [
                 Positioned(
-                  right: 0,
+                  top: screenHeight * 0.2,
                   left: 0,
-                  bottom: 0,
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        'assets/gif/backgroud_app2.gif',
-                        fit: BoxFit.cover,
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: 10,
-                            height: (screenHeight - necscreen) * 0.57,
-                            // color: Colors.amber,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  children: [
-                                    Icon(
-                                      Icons.restaurant,
-                                      color: Colors.white,
-                                      size: 1 + fontPlus2 * 0.06,
-                                    ),
-                                    Text(
-                                      'Soi Siam',
-                                      style: GoogleFonts.rasa(
-                                        fontSize: 1 + fontPlus2 * 0.06,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Restaurant',
-                                      style: GoogleFonts.rasa(
-                                        fontSize: 1 + fontPlus2 * 0.06,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: plusscreen * 0.01,
-                                  height: 10,
-                                  // color: Colors.amber,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 0,
                   child: SizedBox(
-                    height: screenHeight * 0.55,
                     child: Image.asset(
-                      'assets/image/vector_backgroud.png',
+                      'assets/image/vector_backgroud2.png',
+                      scale: plusscreen * 0.001 * 1.5,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -119,7 +52,25 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const ContactFirstVertical(),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.restaurant,
+                                color: const Color(0xFF7D7D7D),
+                                size: 1 + fontPlus2 * 0.05,
+                              ),
+                              SizedBox(
+                                width: screenWidth * 0.01,
+                              ),
+                              Text(
+                                'Soi Siam',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 1 + fontPlus2 * 0.05,
+                                  color: const Color(0xFF7D7D7D),
+                                ),
+                              ),
+                            ],
+                          ),
                           InkWell(
                             onTap: () {
                               Navigator.pushReplacement(
@@ -127,7 +78,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                                 PageRouteBuilder(
                                   pageBuilder:
                                       (context, animation1, animation2) =>
-                                          const OrientationSecoundPage(),
+                                          const OrientationFirstPage(),
                                   transitionDuration:
                                       const Duration(seconds: 0),
                                   maintainState: false,
@@ -196,7 +147,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                         ),
                         Flexible(
                           child: Text(
-                            'Accept only Credit Card',
+                            'Accept Credit Card Only',
                             style: GoogleFonts.roboto(
                                 fontSize: plusscreen * 0.0115,
                                 color: const Color(0xFFEB5757),
@@ -208,37 +159,20 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       ],
                     ),
                     SizedBox(
-                      height: plusscreen * 0.02,
+                      height: plusscreen * 0.03,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MenuPage()),
-                        );
-                      },
-                      child: Container(
-                        height: plusscreen * 0.045,
-                        width: plusscreen * 0.15,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF496EE2),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Tap to Order',
-                            style: GoogleFonts.roboto(
-                              fontSize: plusscreen * 0.013,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                    WidgetSecondPage(
+                      height: screenHeight * 0.27,
+                      width: screenWidth * 0.42,
+                      bottom1: screenHeight * 0.045,
+                      bottom2: screenHeight * 0.045,
+                      font: 0.055,
+                      heighttext: screenHeight * 0.065,
                     ),
                     SizedBox(
-                      height: fontPlus * 3.25,
-                    )
+                      height: fontPlus * 0.7,
+                    ),
+                    const ContactSecondVertical()
                   ],
                 ),
               ],

@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ContactBottomsheet extends StatefulWidget {
-  const ContactBottomsheet({super.key});
+class ContactFirstHorizon extends StatefulWidget {
+  const ContactFirstHorizon({super.key});
 
   @override
-  State<ContactBottomsheet> createState() => _ContactBottomsheetState();
+  State<ContactFirstHorizon> createState() => _ContactFirstHorizonState();
 }
 
-class _ContactBottomsheetState extends State<ContactBottomsheet> {
+class _ContactFirstHorizonState extends State<ContactFirstHorizon> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    // double plusscreen = screenHeight + screenWidth;
     double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
     double plusscreen = screenHeight + screenWidth;
 
-    // double fontPlus = plusscreen * 0.1;
     double fontPlus2 = plusscreen2 * 2;
     double fontPlus3 = plusscreen2 * 5;
 
@@ -43,7 +41,7 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(fontPlus3 * 0.02 * 1,
-                            fontPlus3 * 0.02 * 2, fontPlus3 * 0.02 * 1, 0),
+                            fontPlus3 * 0.015 * 2, fontPlus3 * 0.02 * 1, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,18 +49,26 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                             Expanded(
                               flex: 6,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const CustomTextStyle(
-                                    label: "Contact Us",
-                                  ),
                                   SizedBox(
-                                    height: 1 + fontPlus2 * 0.015,
-                                  ),
-                                  const CustomTextStyle(
-                                    label:
-                                        "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
-                                  ),
+                                    width: screenWidth * 0.4,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const CustomTextStyle(
+                                          label: "Contact Us",
+                                        ),
+                                        SizedBox(
+                                          height: 1 + fontPlus2 * 0.015,
+                                        ),
+                                        const CustomTextStyle(
+                                          label:
+                                              "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -80,32 +86,32 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/svg/phone_icon.svg',
-                                            height: 10 + fontPlus2 * 0.0005,
-                                            width: 10 + fontPlus2 * 0.0005,
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
                                           ),
                                           SizedBox(
-                                            height: 3 + fontPlus2 * 0.025,
+                                            height: 1 + fontPlus2 * 0.02,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/instagram_icon.svg',
-                                            height: 10 + fontPlus2 * 0.02,
-                                            width: 10 + fontPlus2 * 0.02,
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
                                           ),
                                           SizedBox(
-                                            height: 3 + fontPlus2 * 0.025,
+                                            height: 1 + fontPlus2 * 0.02,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/youtube_icon.svg',
-                                            height: 10 + fontPlus2 * 0.0005,
-                                            width: 10 + fontPlus2 * 0.0005,
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
                                           ),
                                           SizedBox(
-                                            height: 3 + fontPlus2 * 0.025,
+                                            height: 1 + fontPlus2 * 0.02,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/mail_icon.svg',
-                                            height: 10 + fontPlus2 * 0.0005,
-                                            width: 10 + fontPlus2 * 0.0005,
+                                            height: 10 + fontPlus2 * 0.005,
+                                            width: 10 + fontPlus2 * 0.005,
                                           ),
                                         ],
                                       ),
@@ -123,43 +129,43 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                                               "090-890-xxxx",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.02,
+                                                      1 + fontPlus2 * 0.015,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 3 + fontPlus2 * 0.025,
+                                              height: 1 + fontPlus2 * 0.02,
                                             ),
                                             Text(
                                               "SoiSiam",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.02,
+                                                      1 + fontPlus2 * 0.015,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 3 + fontPlus2 * 0.025,
+                                              height: 1 + fontPlus2 * 0.02,
                                             ),
                                             Text(
                                               "SoiSiam Chanal",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.02,
+                                                      1 + fontPlus2 * 0.015,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 3 + fontPlus2 * 0.025,
+                                              height: 1 + fontPlus2 * 0.02,
                                             ),
                                             Text(
                                               "SoiSiam@gmail.co.th",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.02,
+                                                      1 + fontPlus2 * 0.015,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
@@ -184,7 +190,7 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                               '© Copyright 2022 l Powered by',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 1 + fontPlus2 * 0.03),
+                                  fontSize: 1 + fontPlus2 * 0.02),
                             ),
                           ),
                           const SizedBox(
@@ -192,8 +198,8 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
                           ),
                           Image.asset(
                             'assets/image/smile_icon.png',
-                            height: 10 + fontPlus2 * 0.05,
-                            width: 10 + fontPlus2 * 0.05,
+                            height: 10 + fontPlus2 * 0.03,
+                            width: 10 + fontPlus2 * 0.03,
                           ),
                         ],
                       ),
@@ -210,7 +216,7 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
           Icon(
             Icons.restaurant,
             color: const Color(0xFF7D7D7D),
-            size: 1 + fontPlus2 * 0.05,
+            size: 0.5 + fontPlus2 * 0.03,
           ),
           SizedBox(
             width: screenWidth * 0.01,
@@ -218,7 +224,7 @@ class _ContactBottomsheetState extends State<ContactBottomsheet> {
           Text(
             'Soi Siam',
             style: GoogleFonts.roboto(
-              fontSize: 1 + fontPlus2 * 0.05,
+              fontSize: 0.5 + fontPlus2 * 0.03,
               color: const Color(0xFF7D7D7D),
             ),
           ),
@@ -242,7 +248,7 @@ class CustomTextStyle extends StatelessWidget {
     return Text(
       label,
       style: GoogleFonts.roboto(
-          color: Colors.white, fontSize: 1 + fontPlus2 * 0.02),
+          color: Colors.white, fontSize: 1 + fontPlus2 * 0.015),
     );
   }
 }

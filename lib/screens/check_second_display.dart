@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/screens/FirstPage/horizon_firstpage.dart';
-import 'package:test_flutter/screens/FirstPage/vertical_firstpage.dart';
+import 'package:test_flutter/screens/SecoundPage/horizon_secondpage.dart';
+import 'package:test_flutter/screens/SecoundPage/vertical_secondpage.dart';
 
 class OrientationSecoundPage extends StatefulWidget {
   const OrientationSecoundPage({super.key});
 
   @override
-  _OrientationSecoundPageState createState() => _OrientationSecoundPageState();
+  State<OrientationSecoundPage> createState() => _OrientationSecoundPageState();
 }
 
 class _OrientationSecoundPageState extends State<OrientationSecoundPage> {
@@ -16,8 +16,8 @@ class _OrientationSecoundPageState extends State<OrientationSecoundPage> {
       body: OrientationBuilder(
         builder: (context, orientation) {
           return orientation == Orientation.portrait
-              ? const FirstPageVertical()
-              : const FirstPageHorizontal();
+              ? const SecondPageVertical()
+              : const SecondPageHorizontal();
         },
       ),
     );

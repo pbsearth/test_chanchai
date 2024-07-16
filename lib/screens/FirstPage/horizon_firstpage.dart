@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_flutter/screens/SecoundPage/second_page.dart';
-import 'package:test_flutter/screens/contact2.dart';
+import 'package:test_flutter/screens/check_second_display.dart';
+import 'package:test_flutter/screens/FirstPage/contact_horizon_first.dart';
 import 'package:test_flutter/screens/menu_page.dart';
 
 class FirstPageHorizontal extends StatefulWidget {
@@ -24,16 +24,8 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
         double necscreen = screenHeight - screenWidth;
 
         double fontPlus = plusscreen * 0.1;
-        // double necscreenabs = necscreen.abs();
         double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
         double fontPlus2 = plusscreen2 * 2;
-        // print('screenHeight : ${screenHeight}');
-        // print('screenWidth : ${screenWidth}');
-        // print('plusscreen : ${plusscreen}');
-        // print('necscreen : ${necscreen}');
-        // print('necscreenabs : ${necscreenabs}');
-        // print('new : ${screenHeight - necscreenabs}');
-
         return SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +56,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                             padding: EdgeInsets.symmetric(
                                 vertical: fontPlus * 0.1,
                                 horizontal: fontPlus * 0.15),
-                            child: const Contact2(),
+                            child: const ContactFirstHorizon(),
                           ),
                           SizedBox(
                             height: plusscreen * 0.025,
@@ -172,7 +164,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                       Image.asset(
                         'assets/gif/backgroud_app2.gif',
                         fit: BoxFit.fill,
-                        scale: fontPlus * 0.005,
+                        scale: fontPlus * 0.006,
                       ),
                       Column(
                         children: [
@@ -228,7 +220,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                                   PageRouteBuilder(
                                     pageBuilder:
                                         (context, animation1, animation2) =>
-                                            const SecondPage(),
+                                            const OrientationSecoundPage(),
                                     transitionDuration:
                                         const Duration(seconds: 0),
                                     maintainState: false,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:test_flutter/check_first_display.dart';
+import 'package:test_flutter/screens/bloc/bloc_foodlist/foodlist_bloc.dart';
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  const MenuPage({super.key});
 
   @override
   State<MenuPage> createState() => _MenuPageState();
@@ -13,9 +14,16 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   int selectedIndex = 0;
   int selectedIndex2 = 0;
+  int selectedIndex3 = -1; // Initial index to none selected
+  Set<String> selectedFoodIds = {}; // Set to store selected foodIds
+
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen = screenHeight + screenWidth;
+
     return Scaffold(
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,27 +41,17 @@ class _MenuPageState extends State<MenuPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation1, animation2) =>
-                                        const OrientationFirstPage(),
-                                transitionDuration: const Duration(seconds: 0),
-                                maintainState: false,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(10, 20, 0, 10),
-                            width: 70,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFf6f6f6),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(10, 20, 0, 10),
+                          width: 70,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -74,10 +72,10 @@ class _MenuPageState extends State<MenuPage> {
                           ),
                         ),
                         AnimSearchBar(
-                          width: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.4,
                           textController: textController,
                           onSuffixTap: () {},
-                          onSubmitted: (String) {},
+                          onSubmitted: (String search) {},
                         ),
                       ],
                     ),
@@ -118,6 +116,296 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                 ),
+                BlocBuilder<FoodBloc, FoodState>(
+                  builder: (context, state) {
+                    if (state is FoodInitial) {
+                      return const Center(
+                        child: Text('Press button to fetch food data'),
+                      );
+                    } else if (state is FoodLoading) {
+                      return SizedBox(
+                        width: double.infinity,
+                        height: screenHeight * 0.5,
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF02ccfe),
+                          ),
+                        ),
+                      );
+                    } else if (state is FoodSuccess) {
+                      return Expanded(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            if (constraints.maxWidth > constraints.maxHeight) {
+                              return ListView.builder(
+                                itemCount: (state.foodList.length / 4).ceil(),
+                                itemBuilder: (context, rowIndex) {
+                                  return Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: List.generate(
+                                      4,
+                                      (colIndex) {
+                                        final index = rowIndex * 4 + colIndex;
+                                        if (index < state.foodList.length) {
+                                          final foodId =
+                                              state.foodList[index].foodId;
+                                          final isSelected =
+                                              selectedFoodIds.contains(foodId);
+
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                if (isSelected) {
+                                                  selectedFoodIds
+                                                      .remove(foodId);
+                                                } else {
+                                                  selectedFoodIds
+                                                      .add(foodId.toString());
+                                                }
+                                                // Toggle selection
+                                                selectedIndex3 =
+                                                    isSelected ? -1 : index;
+                                              });
+                                              // Print food name
+                                              print(state
+                                                      .foodList[index].foodId ??
+                                                  'No Name');
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: plusscreen * 0.0005,
+                                                vertical: plusscreen * 0.002,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: screenHeight * 0.15,
+                                                    width: screenWidth * 0.15,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .vertical(
+                                                        top:
+                                                            Radius.circular(10),
+                                                      ),
+                                                      border: Border.all(
+                                                        color: isSelected
+                                                            ? const Color(
+                                                                0xFF02ccfe) // Selected border color
+                                                            : Colors
+                                                                .transparent, // Default border color
+                                                        width: 3,
+                                                      ),
+                                                      image: state
+                                                                      .foodList[
+                                                                          index]
+                                                                      .imageName !=
+                                                                  null &&
+                                                              state
+                                                                  .foodList[
+                                                                      index]
+                                                                  .imageName!
+                                                                  .isNotEmpty
+                                                          ? DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                state
+                                                                    .foodList[
+                                                                        index]
+                                                                    .imageName!,
+                                                              ),
+                                                              fit: BoxFit.cover,
+                                                            )
+                                                          : const DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/image/noimage2.jpg'),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      color: isSelected
+                                                          ? const Color(
+                                                              0xFF02ccfe)
+                                                          // Selected border color
+                                                          : Colors.amberAccent,
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .vertical(
+                                                        bottom:
+                                                            Radius.circular(10),
+                                                      ),
+                                                    ),
+                                                    height: screenHeight * 0.05,
+                                                    width: screenWidth * 0.15,
+                                                    child: Center(
+                                                      child: Text(
+                                                        state.foodList[index]
+                                                                .foodName ??
+                                                            'No Name',
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          return SizedBox(
+                                            width: plusscreen * 0.1,
+                                          ); // Spacer for empty cell
+                                        }
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            } else {
+                              return ListView.builder(
+                                itemCount: (state.foodList.length / 2).ceil(),
+                                itemBuilder: (context, rowIndex) {
+                                  return Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: List.generate(
+                                      2,
+                                      (colIndex) {
+                                        final index = rowIndex * 2 + colIndex;
+                                        if (index < state.foodList.length) {
+                                          final foodId =
+                                              state.foodList[index].foodId;
+                                          final isSelected =
+                                              selectedFoodIds.contains(foodId);
+
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                if (isSelected) {
+                                                  selectedFoodIds
+                                                      .remove(foodId);
+                                                } else {
+                                                  selectedFoodIds
+                                                      .add(foodId.toString());
+                                                }
+                                                // Toggle selection
+                                                selectedIndex3 =
+                                                    isSelected ? -1 : index;
+                                              });
+                                              // Print food name
+                                              print(state.foodList[index]
+                                                      .foodName ??
+                                                  'No Name');
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: plusscreen * 0.0005,
+                                                vertical: plusscreen * 0.002,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: screenHeight * 0.2,
+                                                    width: screenWidth * 0.3,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .vertical(
+                                                        top:
+                                                            Radius.circular(10),
+                                                      ),
+                                                      border: Border.all(
+                                                        color: isSelected
+                                                            ? Colors
+                                                                .blue // Selected border color
+                                                            : Colors
+                                                                .transparent, // Default border color
+                                                        width: 3,
+                                                      ),
+                                                      image: state
+                                                                      .foodList[
+                                                                          index]
+                                                                      .imageName !=
+                                                                  null &&
+                                                              state
+                                                                  .foodList[
+                                                                      index]
+                                                                  .imageName!
+                                                                  .isNotEmpty
+                                                          ? DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                state
+                                                                    .foodList[
+                                                                        index]
+                                                                    .imageName!,
+                                                              ),
+                                                              fit: BoxFit.cover,
+                                                            )
+                                                          : const DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/image/noimage2.jpg'),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      color: Colors.amberAccent,
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
+                                                        bottom:
+                                                            Radius.circular(10),
+                                                      ),
+                                                    ),
+                                                    height: screenHeight * 0.05,
+                                                    width: screenWidth * 0.3,
+                                                    child: Center(
+                                                      child: Text(
+                                                        state.foodList[index]
+                                                                .foodName ??
+                                                            'No Name',
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          return SizedBox(
+                                            width: plusscreen * 0.1,
+                                          ); // Spacer for empty cell
+                                        }
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        ),
+                      );
+                    } else if (state is FoodError) {
+                      return Center(
+                        child: Text('Error: ${state.message}'),
+                      );
+                    }
+                    return Container();
+                  },
+                )
               ],
             ),
           ),
@@ -234,6 +522,9 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Widget buildfoodSet(String text, int index) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen = screenHeight + screenWidth;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -241,7 +532,8 @@ class _MenuPageState extends State<MenuPage> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: EdgeInsets.symmetric(
+            vertical: plusscreen * 0.005, horizontal: plusscreen * 0.01),
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -271,6 +563,9 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Widget buildfoodCategory(String text, int index) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen = screenHeight + screenWidth;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -278,7 +573,8 @@ class _MenuPageState extends State<MenuPage> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        padding: EdgeInsets.symmetric(
+            vertical: plusscreen * 0.005, horizontal: plusscreen * 0.005),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: selectedIndex2 == index

@@ -24,6 +24,10 @@ dependencies:
   anim_search_bar: ^2.0.3
   animated_search_bar: ^2.7.2
   searchbar_animation: ^0.0.4
+  bloc: ^8.1.4
+  get_it: ^7.7.0
+  provider: ^6.1.2
+  flutter_bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:
@@ -40,3 +44,4 @@ flutter:
     - assets/svg/
     - assets/gif/
     - assets/image/
+    - assets/data/

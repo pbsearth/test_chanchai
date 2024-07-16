@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Contact2 extends StatefulWidget {
-  const Contact2({super.key});
+class ContactFirstVertical extends StatefulWidget {
+  const ContactFirstVertical({super.key});
 
   @override
-  State<Contact2> createState() => _Contact2State();
+  State<ContactFirstVertical> createState() => _ContactFirstVerticalState();
 }
 
-class _Contact2State extends State<Contact2> {
+class _ContactFirstVerticalState extends State<ContactFirstVertical> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    // double plusscreen = screenHeight + screenWidth;
     double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
     double plusscreen = screenHeight + screenWidth;
 
-    // double fontPlus = plusscreen * 0.1;
     double fontPlus2 = plusscreen2 * 2;
     double fontPlus3 = plusscreen2 * 5;
 
@@ -43,7 +41,7 @@ class _Contact2State extends State<Contact2> {
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(fontPlus3 * 0.02 * 1,
-                            fontPlus3 * 0.015 * 2, fontPlus3 * 0.02 * 1, 0),
+                            fontPlus3 * 0.02 * 2, fontPlus3 * 0.02 * 1, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,26 +49,18 @@ class _Contact2State extends State<Contact2> {
                             Expanded(
                               flex: 6,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  const CustomTextStyle(
+                                    label: "Contact Us",
+                                  ),
                                   SizedBox(
-                                    width: screenWidth * 0.4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const CustomTextStyle(
-                                          label: "Contact Us",
-                                        ),
-                                        SizedBox(
-                                          height: 1 + fontPlus2 * 0.015,
-                                        ),
-                                        const CustomTextStyle(
-                                          label:
-                                              "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                    height: 1 + fontPlus2 * 0.015,
+                                  ),
+                                  const CustomTextStyle(
+                                    label:
+                                        "Rattanathibech 28 Alley, Tambon Bang Kraso, Mueang Nonthaburi District, Nonthaburi 11000",
+                                  ),
                                 ],
                               ),
                             ),
@@ -88,11 +78,11 @@ class _Contact2State extends State<Contact2> {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/svg/phone_icon.svg',
-                                            height: 10 + fontPlus2 * 0.005,
-                                            width: 10 + fontPlus2 * 0.005,
+                                            height: 10 + fontPlus2 * 0.0005,
+                                            width: 10 + fontPlus2 * 0.0005,
                                           ),
                                           SizedBox(
-                                            height: 1 + fontPlus2 * 0.02,
+                                            height: 3 + fontPlus2 * 0.025,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/instagram_icon.svg',
@@ -100,20 +90,20 @@ class _Contact2State extends State<Contact2> {
                                             width: 10 + fontPlus2 * 0.005,
                                           ),
                                           SizedBox(
-                                            height: 1 + fontPlus2 * 0.02,
+                                            height: 3 + fontPlus2 * 0.025,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/youtube_icon.svg',
-                                            height: 10 + fontPlus2 * 0.005,
-                                            width: 10 + fontPlus2 * 0.005,
+                                            height: 10 + fontPlus2 * 0.0005,
+                                            width: 10 + fontPlus2 * 0.0005,
                                           ),
                                           SizedBox(
-                                            height: 1 + fontPlus2 * 0.02,
+                                            height: 3 + fontPlus2 * 0.025,
                                           ),
                                           SvgPicture.asset(
                                             'assets/svg/mail_icon.svg',
-                                            height: 10 + fontPlus2 * 0.005,
-                                            width: 10 + fontPlus2 * 0.005,
+                                            height: 10 + fontPlus2 * 0.0005,
+                                            width: 10 + fontPlus2 * 0.0005,
                                           ),
                                         ],
                                       ),
@@ -131,43 +121,43 @@ class _Contact2State extends State<Contact2> {
                                               "090-890-xxxx",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.015,
+                                                      1 + fontPlus2 * 0.02,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 1 + fontPlus2 * 0.02,
+                                              height: 3 + fontPlus2 * 0.025,
                                             ),
                                             Text(
                                               "SoiSiam",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.015,
+                                                      1 + fontPlus2 * 0.02,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 1 + fontPlus2 * 0.02,
+                                              height: 3 + fontPlus2 * 0.025,
                                             ),
                                             Text(
                                               "SoiSiam Chanal",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.015,
+                                                      1 + fontPlus2 * 0.02,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
                                             ),
                                             SizedBox(
-                                              height: 1 + fontPlus2 * 0.02,
+                                              height: 3 + fontPlus2 * 0.025,
                                             ),
                                             Text(
                                               "SoiSiam@gmail.co.th",
                                               style: TextStyle(
                                                   fontSize:
-                                                      1 + fontPlus2 * 0.015,
+                                                      1 + fontPlus2 * 0.02,
                                                   color: Colors.white),
                                               softWrap: true,
                                               maxLines: null,
@@ -183,6 +173,9 @@ class _Contact2State extends State<Contact2> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 3 + fontPlus2 * 0.05,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -192,7 +185,7 @@ class _Contact2State extends State<Contact2> {
                               '© Copyright 2022 l Powered by',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 1 + fontPlus2 * 0.02),
+                                  fontSize: 1 + fontPlus2 * 0.03),
                             ),
                           ),
                           const SizedBox(
@@ -200,8 +193,8 @@ class _Contact2State extends State<Contact2> {
                           ),
                           Image.asset(
                             'assets/image/smile_icon.png',
-                            height: 10 + fontPlus2 * 0.03,
-                            width: 10 + fontPlus2 * 0.03,
+                            height: 10 + fontPlus2 * 0.05,
+                            width: 10 + fontPlus2 * 0.05,
                           ),
                         ],
                       ),
@@ -218,7 +211,7 @@ class _Contact2State extends State<Contact2> {
           Icon(
             Icons.restaurant,
             color: const Color(0xFF7D7D7D),
-            size: 0.5 + fontPlus2 * 0.03,
+            size: 1 + fontPlus2 * 0.05,
           ),
           SizedBox(
             width: screenWidth * 0.01,
@@ -226,7 +219,7 @@ class _Contact2State extends State<Contact2> {
           Text(
             'Soi Siam',
             style: GoogleFonts.roboto(
-              fontSize: 0.5 + fontPlus2 * 0.03,
+              fontSize: 1 + fontPlus2 * 0.05,
               color: const Color(0xFF7D7D7D),
             ),
           ),
@@ -250,7 +243,7 @@ class CustomTextStyle extends StatelessWidget {
     return Text(
       label,
       style: GoogleFonts.roboto(
-          color: Colors.white, fontSize: 1 + fontPlus2 * 0.015),
+          color: Colors.white, fontSize: 1 + fontPlus2 * 0.02),
     );
   }
 }

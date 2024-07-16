@@ -6,7 +6,7 @@ class OrientationFirstPage extends StatefulWidget {
   const OrientationFirstPage({super.key});
 
   @override
-  _OrientationFirstPageState createState() => _OrientationFirstPageState();
+  State<OrientationFirstPage> createState() => _OrientationFirstPageState();
 }
 
 class _OrientationFirstPageState extends State<OrientationFirstPage> {
