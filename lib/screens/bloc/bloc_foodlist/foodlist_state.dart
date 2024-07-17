@@ -13,11 +13,17 @@ class FoodLoading extends FoodState {}
 
 class FoodSuccess extends FoodState {
   final List<Food> foodList;
+  final List<FoodCategory> foodCategoryList;
+  final List<FoodSet> foodSetList;
 
-  const FoodSuccess({required this.foodList});
+  const FoodSuccess({
+    required this.foodList,
+    required this.foodCategoryList,
+    required this.foodSetList,
+  });
 
   @override
-  List<Object> get props => [foodList];
+  List<Object> get props => [foodList, foodCategoryList, foodSetList];
 }
 
 class FoodError extends FoodState {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/screens/FirstPage/horizon_firstpage.dart';
-import 'package:test_flutter/screens/FirstPage/vertical_firstpage.dart';
+import 'package:test_flutter/screens/FirstPage/presentation/horizon_firstpage.dart';
+import 'package:test_flutter/screens/FirstPage/presentation/vertical_firstpage.dart';
 
 class OrientationFirstPage extends StatefulWidget {
   const OrientationFirstPage({super.key});

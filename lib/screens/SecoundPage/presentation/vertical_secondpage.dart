@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_flutter/screens/check_first_display.dart';
-import 'package:test_flutter/screens/SecoundPage/cantact_vertical_second.dart';
-import 'package:test_flutter/screens/SecoundPage/widget_secondpage.dart';
+import 'package:test_flutter/screens/SecoundPage/widgets/cantact_vertical_second.dart';
+import 'package:test_flutter/screens/SecoundPage/widgets/widget_secondpage.dart';
 
 class SecondPageVertical extends StatefulWidget {
   const SecondPageVertical({super.key});

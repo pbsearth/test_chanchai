@@ -14,8 +14,12 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
       emit(FoodLoading());
 
       try {
-        final foodList = await foodRepository.fetchFoodData();
-        emit(FoodSuccess(foodList: foodList));
+        final foodEntity = await foodRepository.fetchFoodData();
+        emit(FoodSuccess(
+          foodList: foodEntity.result?.food ?? [],
+          foodCategoryList: foodEntity.result?.foodCategory ?? [],
+          foodSetList: foodEntity.result?.foodSet ?? [],
+        ));
       } catch (e) {
         emit(FoodError(message: e.toString()));
       }

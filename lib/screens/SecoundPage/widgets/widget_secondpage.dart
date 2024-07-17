@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_flutter/screens/menu_page.dart';
+import 'package:test_flutter/screens/MenuPage/presentation/menu_page.dart';
 
 class WidgetSecondPage extends StatefulWidget {
   final double height;

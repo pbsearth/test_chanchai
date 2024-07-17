@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/screens/SecoundPage/horizon_secondpage.dart';
-import 'package:test_flutter/screens/SecoundPage/vertical_secondpage.dart';
+import 'package:test_flutter/screens/SecoundPage/presentation/horizon_secondpage.dart';
+import 'package:test_flutter/screens/SecoundPage/presentation/vertical_secondpage.dart';
 
 class OrientationSecoundPage extends StatefulWidget {
   const OrientationSecoundPage({super.key});
