@@ -12,7 +12,6 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   FoodBloc(this.foodRepository) : super(FoodInitial()) {
     on<FetchFoodDataEvent>((event, emit) async {
       emit(FoodLoading());
-
       try {
         final foodEntity = await foodRepository.fetchFoodData();
         emit(FoodSuccess(

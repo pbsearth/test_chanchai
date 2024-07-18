@@ -11,14 +11,14 @@ class FoodListView extends StatelessWidget {
   final FoodState state;
 
   const FoodListView({
-    Key? key,
+    super.key,
     required this.foodList,
     required this.selectedFoodIds,
     required this.selectedFoodItems,
     required this.onFoodTap,
     required this.updateSelectedFood,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

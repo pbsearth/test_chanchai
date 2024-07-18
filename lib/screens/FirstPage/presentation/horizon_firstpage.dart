@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/screens/FirstPage/Widgets/contact_horizon_first.dart';
 import 'package:test_flutter/screens/MenuPage/presentation/menu_page.dart';
-import 'package:test_flutter/screens/MenuPage/presentation/menu_page_new.dart';
 import 'package:test_flutter/screens/check_second_display.dart';
 
 class FirstPageHorizontal extends StatefulWidget {

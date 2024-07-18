@@ -29,7 +29,8 @@ dependencies:
   provider: ^6.1.2
   flutter_bloc: ^8.1.4
   responsive_sizer: ^3.3.1
-
+  scrollable_positioned_list: ^0.3.8
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
