@@ -23,64 +23,53 @@ class AllMenu extends StatefulWidget {
 }
 
 class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
-  // late TabController _tabController;
   List<String> selectedFoodIds = [];
   List<Food> selectedFoodItems = [];
   int selectedIndex3 = -1;
   String selectedSetId = '';
   String selectedFoodCatId = '';
+  String searchQuery = '';
 
   final ItemScrollController _scrollController = ItemScrollController();
   final ItemPositionsListener _itemPositionsListener =
       ItemPositionsListener.create();
+  late ScrollController categoryScrollController;
 
   @override
   void initState() {
     super.initState();
-    // _tabController = TabController(length: widget.foodSets.length, vsync: this);
     selectedSetId = widget.foodSets.first.foodSetId.toString();
-
-    selectedFoodCatId = widget.foodcat.first.foodCatName!;
     selectedFoodCatId = groupFoodByCategory2(filterFoodList()).keys.first;
+
+    categoryScrollController = ScrollController();
+    _itemPositionsListener.itemPositions.addListener(_onScrollPositionChanged);
   }
 
-  void onFoodTap(Food food) {
-    final foodId = food.foodId.toString();
+  @override
+  void dispose() {
+    _itemPositionsListener.itemPositions
+        .removeListener(_onScrollPositionChanged);
+    categoryScrollController.dispose();
+    super.dispose();
+  }
 
-    if (!selectedFoodIds.contains(foodId)) {
+  void _onScrollPositionChanged() {
+    final itemPositions = _itemPositionsListener.itemPositions.value;
+
+    if (itemPositions.isEmpty) return;
+
+    final firstVisibleItem = itemPositions.first;
+
+    if (firstVisibleItem.index < 0) return;
+
+    final categoryNames = groupFoodByCategory2(filterFoodList()).keys.toList();
+    final visibleCategoryName = categoryNames[firstVisibleItem.index];
+
+    if (selectedFoodCatId != visibleCategoryName) {
       setState(() {
-        selectedFoodIds.add(foodId);
-        selectedFoodItems.add(food);
-        widget.onFoodSelected(food);
-        selectedIndex3 = selectedFoodIds.indexOf(foodId);
+        selectedFoodCatId = visibleCategoryName;
       });
-      print('add');
     }
-  }
-
-  List<Food> filterFoodList() {
-    return widget.foodList.where((food) {
-      final matchesSetId = food.foodSetId == selectedSetId;
-      return matchesSetId;
-    }).toList();
-  }
-
-  Map<String, List<Food>> groupFoodByCategory2(List<Food> foodList) {
-    final Map<String, List<Food>> groupedFood2 = {};
-
-    final Map<String, String> foodCatMap = {};
-    for (var foodCat in widget.foodcat) {
-      foodCatMap[foodCat.foodCatId!] = foodCat.foodCatName!;
-    }
-
-    for (var food in foodList) {
-      if (foodCatMap.containsKey(food.foodCatId)) {
-        final foodCatName = foodCatMap[food.foodCatId]!;
-        groupedFood2.putIfAbsent(foodCatName, () => []).add(food);
-      }
-    }
-
-    return groupedFood2;
   }
 
   void _scrollToCategory(String categoryName) {
@@ -94,6 +83,67 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
     }
   }
 
+  void onFoodTap(Food food) {
+    final foodId = food.foodId.toString();
+
+    setState(() {
+      if (food.isOutStock == false) {
+        selectedFoodIds.add(foodId);
+        selectedFoodItems.add(food);
+        widget.onFoodSelected(food);
+        selectedIndex3 = selectedFoodIds.indexOf(foodId);
+      } else {
+        print('${food.foodName} is Sold Out');
+      }
+    });
+
+    print('add');
+  }
+
+  List<Food> filterFoodList() {
+    final filteredList = widget.foodList.where((food) {
+      final matchesSetId = food.foodSetId == selectedSetId;
+      final matchesSearchQuery = searchQuery.isEmpty ||
+          (food.foodName?.toLowerCase().contains(searchQuery.toLowerCase()) ??
+              false);
+      return matchesSetId && matchesSearchQuery;
+    }).toList();
+    return filteredList;
+  }
+
+  Map<String, List<Food>> groupFoodByCategory2(List<Food> foodList) {
+    final Map<String, List<Food>> groupedFood2 = {};
+    final Map<String, String> foodCatMap = {};
+    final Map<String, int> foodCatSortingMap = {};
+
+    for (var foodCat in widget.foodcat) {
+      if (foodCat.active!) {
+        foodCatMap[foodCat.foodCatId!] = foodCat.foodCatName!;
+        foodCatSortingMap[foodCat.foodCatId!] = foodCat.foodCatSorting ?? 0;
+      }
+    }
+
+    for (var food in foodList) {
+      if (foodCatMap.containsKey(food.foodCatId)) {
+        final foodCatName = foodCatMap[food.foodCatId]!;
+        groupedFood2.putIfAbsent(foodCatName, () => []).add(food);
+      }
+    }
+
+    final sortedCategoryNames = foodCatSortingMap.entries
+        .where((entry) => groupedFood2.containsKey(foodCatMap[entry.key]))
+        .toList()
+      ..sort((a, b) => a.value.compareTo(b.value));
+
+    final sortedGroupedFood2 = <String, List<Food>>{};
+    for (var entry in sortedCategoryNames) {
+      final categoryName = foodCatMap[entry.key]!;
+      sortedGroupedFood2[categoryName] = groupedFood2[categoryName]!;
+    }
+
+    return sortedGroupedFood2;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -101,7 +151,6 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
     double plusscreen = (screenHeight + screenWidth) * 0.1;
     final foodList = filterFoodList();
     final groupedFood2 = groupFoodByCategory2(foodList);
-    ScrollController categoryScrollController = ScrollController();
 
     return Column(
       children: [
@@ -213,14 +262,13 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              foodCatName,
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            padding: EdgeInsets.fromLTRB(plusscreen * 0.1,
+                                plusscreen * 0.15, 0, plusscreen * 0.05),
+                            child: Text(foodCatName,
+                                style: GoogleFonts.roboto(
+                                  fontSize: plusscreen * 0.12,
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ),
                           GridView.builder(
                             shrinkWrap: true,
@@ -351,14 +399,18 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                                         right: 0,
                                         bottom: 0,
                                         child: Container(
-                                          padding: const EdgeInsets.all(5),
+                                          padding:
+                                              EdgeInsets.all(plusscreen * 0.05),
                                           decoration: const BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.vertical(
                                               bottom: Radius.circular(5),
                                             ),
                                           ),
-                                          height: 18.h,
+                                          height: orientation ==
+                                                  Orientation.landscape
+                                              ? 18.h
+                                              : 13.h,
                                           width: orientation ==
                                                   Orientation.landscape
                                               ? 22.w
@@ -371,7 +423,11 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                                                   food.foodName ?? 'No Name',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 2.5.h,
+                                                    fontSize: orientation ==
+                                                            Orientation
+                                                                .landscape
+                                                        ? 2.5.h
+                                                        : 2.h,
                                                   ),
                                                 ),
                                               ),
@@ -381,7 +437,11 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                                                   food.foodDesc!,
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 2.h,
+                                                    fontSize: orientation ==
+                                                            Orientation
+                                                                .landscape
+                                                        ? 2.h
+                                                        : 1.5.h,
                                                   ),
                                                 ),
                                               ),
@@ -393,7 +453,11 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                                                     '\$${food.foodPrice.toString()}',
                                                     style: TextStyle(
                                                       color: Colors.black,
-                                                      fontSize: 3.h,
+                                                      fontSize: orientation ==
+                                                              Orientation
+                                                                  .landscape
+                                                          ? 2.5.h
+                                                          : 2.h,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),
@@ -406,7 +470,11 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                                                     'Sold Out',
                                                     style: TextStyle(
                                                       color: Colors.red,
-                                                      fontSize: 3.h,
+                                                      fontSize: orientation ==
+                                                              Orientation
+                                                                  .landscape
+                                                          ? 2.5.h
+                                                          : 2.h,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),

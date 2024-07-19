@@ -51,7 +51,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       ),
                       Column(
                         children: [
-                          SizedBox(
+                          Container(
                             width: 10,
                             height: (screenHeight - necscreen) * 0.57,
                             // color: Colors.amber,
@@ -214,8 +214,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const MenuPage()),
+                          MaterialPageRoute(builder: (context) => MenuPage()),
                         );
                       },
                       child: Container(

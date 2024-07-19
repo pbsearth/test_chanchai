@@ -42,7 +42,7 @@ class _WidgetSecondPageState extends State<WidgetSecondPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MenuPage()),
+                  MaterialPageRoute(builder: (context) => MenuPage()),
                 );
               },
               child: Stack(
@@ -112,7 +112,7 @@ class _WidgetSecondPageState extends State<WidgetSecondPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MenuPage()),
+                  MaterialPageRoute(builder: (context) => MenuPage()),
                 );
               },
               child: Stack(

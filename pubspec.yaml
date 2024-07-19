@@ -21,9 +21,6 @@ dependencies:
   gif: ^2.3.0
   dropdown_button2: ^2.3.9
   equatable: ^2.0.5
-  anim_search_bar: ^2.0.3
-  animated_search_bar: ^2.7.2
-  searchbar_animation: ^0.0.4
   bloc: ^8.1.4
   get_it: ^7.7.0
   provider: ^6.1.2
@@ -47,3 +44,6 @@ flutter:
     - assets/gif/
     - assets/image/
     - assets/data/
+    - assets/fonts/
+
+    
