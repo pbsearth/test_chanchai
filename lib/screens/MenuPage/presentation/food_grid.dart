@@ -20,55 +20,58 @@ class FoodGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollablePositionedList.builder(
-      itemScrollController: scrollController,
-      itemPositionsListener: itemPositionsListener,
-      itemCount: groupedFood.length,
-      itemBuilder: (context, index) {
-        final categoryName = groupedFood.keys.elementAt(index);
-        final foodsInCategory = groupedFood[categoryName] ?? [];
+    return OrientationBuilder(builder: (context, orientation) {
+      return ResponsiveSizer(builder: (context, orientation, screenType) {
+        return ScrollablePositionedList.builder(
+          itemScrollController: scrollController,
+          itemPositionsListener: itemPositionsListener,
+          itemCount: groupedFood.length,
+          itemBuilder: (context, index) {
+            final categoryName = groupedFood.keys.elementAt(index);
+            final foodsInCategory = groupedFood[categoryName] ?? [];
 
-        return OrientationBuilder(builder: (context, orientation) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
-                child: Text(
-                  categoryName,
-                  style:
-                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 5.h),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        orientation == Orientation.landscape ? 2 : 4,
-                    childAspectRatio: 1.0,
-                    //            childAspectRatio:
-                    //     (orientation == Orientation.landscape ? 22.w : 45.w) /
-                    //         (orientation == Orientation.landscape ? 40.h : 30.h),
-                    // mainAxisSpacing: 1.h,
-                    // crossAxisSpacing: 1.w,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 5.h),
+                  child: Text(
+                    categoryName,
+                    style:
+                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                   ),
-                  itemCount: foodsInCategory.length,
-                  itemBuilder: (context, foodIndex) {
-                    final food = foodsInCategory[foodIndex];
-                    return FoodItem(
-                      food: food,
-                      onFoodTap: onFoodTap,
-                    );
-                  },
                 ),
-              ),
-            ],
-          );
-        });
-      },
-    );
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 5.h),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          orientation == Orientation.landscape ? 4 : 2,
+                      childAspectRatio: 1.0,
+                      // childAspectRatio: (orientation == Orientation.landscape
+                      //         ? 22.w
+                      //         : 45.w) /
+                      //     (orientation == Orientation.landscape ? 20.h : 20.h),
+                      // mainAxisSpacing: 0.h,
+                      // crossAxisSpacing: 0.w,
+                    ),
+                    itemCount: foodsInCategory.length,
+                    itemBuilder: (context, foodIndex) {
+                      final food = foodsInCategory[foodIndex];
+                      return FoodItem(
+                        food: food,
+                        onFoodTap: onFoodTap,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      });
+    });
   }
 }

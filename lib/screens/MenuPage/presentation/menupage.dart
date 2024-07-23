@@ -16,6 +16,7 @@ class MenuPage2 extends StatelessWidget {
     List<Food> selectedFoodItems = [];
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BlocBuilder<FoodBloc, FoodState>(
         builder: (context, state) {
           if (state is FoodInitial) {

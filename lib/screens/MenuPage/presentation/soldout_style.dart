@@ -5,17 +5,16 @@ class OutOfStockOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65.h,
-      margin: EdgeInsets.symmetric(horizontal: 1.h, vertical: 2.5),
+      height: 26.2.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.black.withOpacity(0.5),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+        color: Colors.white.withOpacity(0.5),
       ),
       alignment: Alignment.center,
       child: Text(
         'Sold Out',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 18.sp,
           fontWeight: FontWeight.bold,
         ),
