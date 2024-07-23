@@ -125,7 +125,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MenuPage2()),
+                                    builder: (context) => MenuPage()),
                               );
                             },
                             child: Container(

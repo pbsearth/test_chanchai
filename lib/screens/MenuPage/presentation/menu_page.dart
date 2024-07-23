@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/screens/MenuPage/widgets/foodlist.dart';
 import 'package:test_flutter/screens/bloc/bloc_foodlist/foodlist_bloc.dart';
@@ -35,6 +36,7 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    double plusscreen = (screenHeight + screenWidth) * 0.1;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -55,7 +57,8 @@ class _MenuPageState extends State<MenuPage> {
               ),
             );
           } else if (state is FoodSuccess) {
-            return buildSuccessState(context, state, screenHeight, screenWidth);
+            return buildSuccessState(
+                context, state, screenHeight, screenWidth, plusscreen);
           } else if (state is FoodError) {
             return Center(
               child: Text('Error: ${state.message}'),
@@ -68,7 +71,7 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Widget buildSuccessState(BuildContext context, FoodSuccess state,
-      double screenHeight, double screenWidth) {
+      double screenHeight, double screenWidth, double plusscreen) {
     if (filteredFoodList.isEmpty) {
       filteredFoodList = state.foodList;
     }
@@ -82,7 +85,7 @@ class _MenuPageState extends State<MenuPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildTopRow(screenWidth),
+                buildTopRow(screenWidth, screenHeight, plusscreen),
                 Expanded(
                   flex: 6,
                   child: AllMenu(
@@ -106,13 +109,14 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget buildTopRow(double screenWidth) {
+  Widget buildTopRow(
+      double screenWidth, double screenHigth, double plusscreen) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         buildBackButton(),
-        buildSearchBar(screenWidth),
+        buildSearchBar(screenWidth, screenHigth, plusscreen),
       ],
     );
   }
@@ -150,11 +154,12 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget buildSearchBar(double screenWidth) {
+  Widget buildSearchBar(
+      double screenWidth, double sceenHigth, double plusscreen) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      width: _isSearchExpanded ? screenWidth * 0.4 : 50,
-      height: 50,
+      width: _isSearchExpanded ? screenWidth * 0.4 : plusscreen * 0.2,
+      height: plusscreen * 0.2,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -188,6 +193,18 @@ class _MenuPageState extends State<MenuPage> {
               },
             ),
           ),
+          //  InkWell(
+          //       onTap: () {
+          //         setState(() {
+          //           if (_isSearchExpanded) {
+          //             textController.clear();
+          //             _onSearchChanged('');
+          //           }
+          //           _isSearchExpanded = !_isSearchExpanded;
+          //         });
+          //       },
+          //       child: SvgPicture.asset('assets/svg/search_icon.svg'),
+          //     ),
           Expanded(
             child: _isSearchExpanded
                 ? TextField(
