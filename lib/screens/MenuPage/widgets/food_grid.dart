@@ -239,10 +239,8 @@ class FoodGrid extends StatelessWidget {
                                                   color: Colors.red,
                                                   fontSize: fontz * 0.7,
                                                   fontWeight: FontWeight.bold,
-                                                  decoration: orientation ==
-                                                          Orientation.landscape
-                                                      ? TextDecoration.underline
-                                                      : TextDecoration.none,
+                                                  decoration:
+                                                      TextDecoration.underline,
                                                   decorationThickness: 2,
                                                   decorationColor: Colors.red,
                                                 ),

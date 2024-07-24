@@ -7,11 +7,10 @@ import 'package:test_flutter/screens/domain/domain_foodlist/models/model_food.da
 
 class AllMenu extends StatefulWidget {
   final Function(Food) onFoodSelected;
+  final Function(String) onSetIdSelected;
 
-  const AllMenu({
-    super.key,
-    required this.onFoodSelected,
-  });
+  const AllMenu(
+      {super.key, required this.onFoodSelected, required this.onSetIdSelected});
 
   @override
   State<AllMenu> createState() => _AllMenuState();
@@ -36,7 +35,6 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
     categoryScrollController = ScrollController();
     _itemPositionsListener.itemPositions.addListener(_onScrollPositionChanged);
 
-    // Set default food set ID after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = context.read<FoodBloc>().state;
       if (state is FoodSuccess) {
@@ -103,12 +101,11 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
         selectedFoodItems.add(food);
         widget.onFoodSelected(food);
         selectedIndex3 = selectedFoodIds.indexOf(foodId);
+        print('add');
       } else {
-        print('${food.foodName} is Sold Out');
+        print('Out of Stock');
       }
     });
-
-    print('add');
   }
 
   @override
@@ -146,10 +143,12 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                   onTap: () {
                     setState(() {
                       selectedSetId = foodSet.foodSetId.toString();
+                      widget.onSetIdSelected(selectedSetId);
                       context.read<FoodBloc>().add(FetchFoodDataEvent(
                             selectedSetId: selectedSetId,
                             searchQuery: searchQuery,
                           ));
+                      print(foodSet.foodSetName.toString());
                     });
                   },
                   child: Container(
@@ -238,7 +237,7 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
           Expanded(
               child: FoodGrid(
             groupedFood2: groupedFood2,
-            onFoodTap: widget.onFoodSelected,
+            onFoodTap: onFoodTap,
             fontz: fontz,
             plusscreen: plusscreen,
             scrollController: _scrollController,

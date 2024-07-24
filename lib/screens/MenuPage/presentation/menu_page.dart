@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/screens/MenuPage/widgets/food_tab.dart';
 import 'package:test_flutter/screens/MenuPage/widgets/order.dart';
@@ -20,6 +20,7 @@ class _MenuPageState extends State<MenuPage> {
   List<String> selectedFoodIds = [];
   List<Food> selectedFoodItems = [];
   Map<String, int> foodQuantities = {};
+  String? selectedSetId;
   bool _isSearchExpanded = false;
   double subtotal = 0.0;
   int countorder = 0;
@@ -80,9 +81,6 @@ class _MenuPageState extends State<MenuPage> {
       double screenWidth,
       double plusscreen,
       double fontz) {
-    // final currentFoodList =
-    //     textController.text.isEmpty ? state.foodList : filteredFoodList;
-
     return OrientationBuilder(builder: (context, orientation) {
       return Row(
         children: [
@@ -99,10 +97,14 @@ class _MenuPageState extends State<MenuPage> {
                     flex: 6,
                     child: textController.text.isEmpty
                         ? AllMenu(
-                            // foodList: state.foodList,
-                            // foodSets: state.foodSetList,
-                            // foodcat: state.foodCategoryList,
                             onFoodSelected: onFoodSelected,
+                            onSetIdSelected: (setId) {
+                              setState(() {
+                                selectedSetId = setId;
+
+                                _onSearchChanged(textController.text);
+                              });
+                            },
                           )
                         : SearchResultsGrid(
                             filteredFoodList: filteredFoodList,
@@ -234,9 +236,7 @@ class _MenuPageState extends State<MenuPage> {
                     ? TextField(
                         controller: textController,
                         onChanged: (query) {
-                          setState(() {
-                            _onSearchChanged(query);
-                          });
+                          _onSearchChanged(query);
                         },
                         decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -300,15 +300,20 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   void _onSearchChanged(String query) {
-    final allFoodList =
-        (context.read<FoodBloc>().state as FoodSuccess).foodList;
-    setState(() {
-      filteredFoodList = allFoodList
-          .where((food) =>
-              food.foodName?.toLowerCase().contains(query.toLowerCase()) ??
-              false)
-          .toList();
-    });
+    final currentState = context.read<FoodBloc>().state;
+
+    if (currentState is FoodSuccess) {
+      final allFoodList = currentState.foodList;
+
+      setState(() {
+        filteredFoodList = allFoodList
+            .where((food) =>
+                (selectedSetId == null || food.foodSetId == selectedSetId) &&
+                (food.foodName?.toLowerCase().contains(query.toLowerCase()) ??
+                    false))
+            .toList();
+      });
+    }
   }
 
   void _onRemoveFoodItem(String foodId) {

@@ -64,9 +64,9 @@ class OrderSummary extends StatelessWidget {
                       Text(
                         'No order selected',
                         style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w300,
                             color: Colors.grey,
-                            fontSize: fontz * 0.8),
+                            fontSize: fontz * 0.85),
                       ),
                     ],
                   )),

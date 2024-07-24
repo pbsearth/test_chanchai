@@ -21,14 +21,13 @@ class SearchResultsGrid extends StatelessWidget {
     double fontz = plusscreen * 0.1;
 
     if (filteredFoodList.isEmpty) {
-      return const Center(child: Text('No results found'));
+      return Center(child: Container());
     }
 
     return OrientationBuilder(builder: (context, orientation) {
       return ResponsiveSizer(builder: (context, orientation, screenType) {
         return GridView.builder(
           shrinkWrap: true,
-          // physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: orientation == Orientation.landscape ? 4 : 2,
             childAspectRatio: (orientation == Orientation.landscape
