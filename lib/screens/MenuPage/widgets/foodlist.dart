@@ -149,14 +149,16 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     double plusscreen = (screenHeight + screenWidth) * 0.1;
+    double fontz = plusscreen * 0.1;
     final foodList = filterFoodList();
     final groupedFood2 = groupFoodByCategory2(foodList);
 
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.all(plusscreen * 0.02),
-          height: plusscreen * 0.25,
+          margin:
+              EdgeInsets.fromLTRB(plusscreen * 0.1, plusscreen * 0.07, 0, 0),
+          height: plusscreen * 0.22,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: widget.foodSets.length,
@@ -170,8 +172,8 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                   });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(right: 1.w),
-                  padding: EdgeInsets.symmetric(horizontal: plusscreen * 0.1),
+                  margin: EdgeInsets.only(right: plusscreen * 0.05),
+                  padding: EdgeInsets.symmetric(horizontal: plusscreen * 0.13),
                   decoration: BoxDecoration(
                     color: selectedSetId == foodSet.foodSetId.toString()
                         ? const Color(0xFF02CCFE)
@@ -180,18 +182,20 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                         color: selectedSetId == foodSet.foodSetId.toString()
                             ? Colors.black
                             : Colors.transparent,
-                        width: 0.5),
-                    borderRadius: BorderRadius.circular(10),
+                        width: 0.2),
+                    borderRadius: BorderRadius.circular(fontz * 0.5),
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     foodSet.foodSetName.toString(),
                     style: TextStyle(
-                      fontSize: plusscreen * 0.07,
-                      fontWeight: FontWeight.bold,
+                      fontSize: fontz * 0.8,
+                      fontWeight: selectedSetId == foodSet.foodSetId.toString()
+                          ? FontWeight.w400
+                          : FontWeight.w700,
                       color: selectedSetId == foodSet.foodSetId.toString()
                           ? Colors.white
-                          : const Color(0xFFACACAC),
+                          : const Color(0xFF949494),
                     ),
                   ),
                 ),
@@ -200,7 +204,8 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
           ),
         ),
         Container(
-          margin: EdgeInsets.all(plusscreen * 0.02),
+          margin:
+              EdgeInsets.fromLTRB(plusscreen * 0.1, plusscreen * 0.05, 0, 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: const Color(0xFFF6F6F6),
@@ -221,23 +226,24 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                   });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(right: 1.w),
-                  padding: EdgeInsets.symmetric(horizontal: plusscreen * 0.1),
+                  padding: EdgeInsets.symmetric(horizontal: plusscreen * 0.13),
                   decoration: BoxDecoration(
                     color: selectedFoodCatId == foodCategory
                         ? const Color(0xFF02CCFE)
                         : const Color(0xFFF6F6F6),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(fontz * 0.5),
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     foodCategory,
                     style: TextStyle(
-                      fontSize: plusscreen * 0.055,
-                      fontWeight: FontWeight.bold,
+                      fontSize: fontz * 0.63,
+                      fontWeight: selectedFoodCatId == foodCategory
+                          ? FontWeight.w400
+                          : FontWeight.w600,
                       color: selectedFoodCatId == foodCategory
                           ? Colors.white
-                          : const Color(0xFFACACAC),
+                          : const Color(0xFF4F4F4F),
                     ),
                   ),
                 ),
@@ -257,239 +263,265 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
                     itemBuilder: (context, index) {
                       final foodCatName = groupedFood2.keys.elementAt(index);
                       final foodItems = groupedFood2[foodCatName]!;
-
+                      bool isLastItem = index == groupedFood2.length - 1;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(plusscreen * 0.1,
-                                plusscreen * 0.15, 0, plusscreen * 0.05),
+                            padding: EdgeInsets.fromLTRB(
+                                plusscreen * 0.2, plusscreen * 0.1, 0, 0),
                             child: Text(foodCatName,
                                 style: GoogleFonts.roboto(
-                                  fontSize: plusscreen * 0.12,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: plusscreen * 0.13,
+                                  fontWeight: FontWeight.w500,
                                 )),
                           ),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  orientation == Orientation.landscape ? 4 : 2,
-                              childAspectRatio:
-                                  (orientation == Orientation.landscape
-                                          ? 22.w
-                                          : 45.w) /
-                                      (orientation == Orientation.landscape
-                                          ? 40.h
-                                          : 30.h),
-                              mainAxisSpacing: 1.h,
-                              crossAxisSpacing: 1.w,
-                            ),
-                            itemCount: foodItems.length,
-                            itemBuilder: (context, index) {
-                              final food = foodItems[index];
+                          Container(
+                            // color: Colors.amber,
+                            margin: EdgeInsets.fromLTRB(plusscreen * 0.1,
+                                plusscreen * 0.04, 0, plusscreen * 0.17),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    orientation == Orientation.landscape
+                                        ? 4
+                                        : 2,
+                                childAspectRatio:
+                                    (orientation == Orientation.landscape
+                                            ? 22.w
+                                            : 45.w) /
+                                        (orientation == Orientation.landscape
+                                            ? 41.h
+                                            : 21.h),
+                                mainAxisSpacing: 1.h,
+                                crossAxisSpacing: 1.w,
+                              ),
+                              itemCount: foodItems.length,
+                              itemBuilder: (context, index) {
+                                final food = foodItems[index];
 
-                              return GestureDetector(
-                                onTap: () => onFoodTap(food),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 0.w, vertical: 1.h),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        right: 0,
-                                        child: Container(
-                                          height: orientation ==
-                                                  Orientation.landscape
-                                              ? 42.h
-                                              : 30.h,
-                                          width: orientation ==
-                                                  Orientation.landscape
-                                              ? 22.w
-                                              : 45.w,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 5,
-                                                offset: Offset(1, 5),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        left: 0,
-                                        right: 0,
-                                        top: 0,
-                                        child: Container(
-                                          height: (orientation ==
-                                                      Orientation.landscape
-                                                  ? 35.h
-                                                  : 30.h) -
-                                              11.h,
-                                          width: orientation ==
-                                                  Orientation.landscape
-                                              ? 22.w
-                                              : 45.w,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.vertical(
-                                              top: Radius.circular(5),
+                                return Container(
+                                  margin: EdgeInsets.fromLTRB(0, 0,
+                                      plusscreen * 0.02, plusscreen * 0.05),
+                                  child: GestureDetector(
+                                    onTap: () => onFoodTap(food),
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          left: 0,
+                                          right: 0,
+                                          child: Container(
+                                            height: orientation ==
+                                                    Orientation.landscape
+                                                ? 41.h
+                                                : 21.h,
+                                            width: orientation ==
+                                                    Orientation.landscape
+                                                ? 22.w
+                                                : 45.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  blurRadius: 2,
+                                                  offset: Offset(
+                                                      0,
+                                                      orientation ==
+                                                              Orientation
+                                                                  .landscape
+                                                          ? 13
+                                                          : 6),
+                                                ),
+                                              ],
                                             ),
-                                            image: food.imageName != null &&
-                                                    food.imageName!.isNotEmpty
-                                                ? DecorationImage(
-                                                    image: NetworkImage(
-                                                        food.imageName!),
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : const DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/image/noimage2.jpg'),
-                                                    fit: BoxFit.cover,
-                                                  ),
                                           ),
                                         ),
-                                      ),
-                                      if (food.isOutStock == true)
                                         Positioned(
                                           left: 0,
                                           right: 0,
                                           top: 0,
-                                          child: Opacity(
-                                            opacity: 0.7,
-                                            child: Container(
-                                              height: (orientation ==
-                                                          Orientation.landscape
-                                                      ? 35.h
-                                                      : 30.h) -
-                                                  11.h,
-                                              width: orientation ==
-                                                      Orientation.landscape
-                                                  ? 22.w
-                                                  : 45.w,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.vertical(
-                                                  top: Radius.circular(5),
-                                                ),
-                                                color: Colors.grey[300],
+                                          child: Container(
+                                            height: (orientation ==
+                                                        Orientation.landscape
+                                                    ? 35.h
+                                                    : 24.h) -
+                                                11.h,
+                                            width: orientation ==
+                                                    Orientation.landscape
+                                                ? 22.w
+                                                : 45.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.vertical(
+                                                top: Radius.circular(5),
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Sold Out',
-                                                  style: GoogleFonts.roboto(
-                                                    fontSize: 5.h,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
+                                              image: food.imageName != null &&
+                                                      food.imageName!.isNotEmpty
+                                                  ? DecorationImage(
+                                                      image: NetworkImage(
+                                                          food.imageName!),
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : const DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/image/noimage2.jpg'),
+                                                      fit: BoxFit.cover,
+                                                    ),
                                             ),
                                           ),
                                         ),
-                                      Positioned(
-                                        left: 0,
-                                        right: 0,
-                                        bottom: 0,
-                                        child: Container(
-                                          padding:
-                                              EdgeInsets.all(plusscreen * 0.05),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.vertical(
-                                              bottom: Radius.circular(5),
+                                        if (food.isOutStock == true)
+                                          Positioned(
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            child: Opacity(
+                                              opacity: 0.7,
+                                              child: Container(
+                                                height: (orientation ==
+                                                            Orientation
+                                                                .landscape
+                                                        ? 35.h
+                                                        : 24.h) -
+                                                    11.h,
+                                                width: orientation ==
+                                                        Orientation.landscape
+                                                    ? 22.w
+                                                    : 45.w,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius
+                                                          .vertical(
+                                                    top: Radius.circular(5),
+                                                  ),
+                                                  color: Colors.grey[300],
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'Out of Stock',
+                                                    style: GoogleFonts.roboto(
+                                                      fontSize: fontz * 1.3,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                          height: orientation ==
-                                                  Orientation.landscape
-                                              ? 18.h
-                                              : 13.h,
-                                          width: orientation ==
-                                                  Orientation.landscape
-                                              ? 22.w
-                                              : 45.w,
-                                          child: Stack(
-                                            children: [
-                                              Positioned(
-                                                top: 0,
-                                                child: Text(
-                                                  food.foodName ?? 'No Name',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: orientation ==
-                                                            Orientation
-                                                                .landscape
-                                                        ? 2.5.h
-                                                        : 2.h,
-                                                  ),
-                                                ),
+                                        Positioned(
+                                          left: 0,
+                                          right: 0,
+                                          bottom: 0,
+                                          child: Container(
+                                            padding: EdgeInsets.all(
+                                                plusscreen * 0.05),
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                bottom: Radius.circular(5),
                                               ),
-                                              Positioned(
-                                                top: 4.h,
-                                                child: Text(
-                                                  food.foodDesc!,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: orientation ==
-                                                            Orientation
-                                                                .landscape
-                                                        ? 2.h
-                                                        : 1.5.h,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(height: 0.5.h),
-                                              if (food.isOutStock == false)
+                                            ),
+                                            height: orientation ==
+                                                    Orientation.landscape
+                                                ? 18.h
+                                                : 9.h,
+                                            width: orientation ==
+                                                    Orientation.landscape
+                                                ? 22.w
+                                                : 45.w,
+                                            child: Stack(
+                                              children: [
                                                 Positioned(
-                                                  bottom: 0,
+                                                  top: 0,
                                                   child: Text(
-                                                    '\$${food.foodPrice.toString()}',
+                                                    food.foodName ?? 'No Name',
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: fontz * 0.7,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: plusscreen * 0.1,
+                                                  child: Text(
+                                                    food.foodDesc!,
                                                     style: TextStyle(
                                                       color: Colors.black,
-                                                      fontSize: orientation ==
-                                                              Orientation
-                                                                  .landscape
-                                                          ? 2.5.h
-                                                          : 2.h,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontSize: fontz * 0.6,
                                                     ),
                                                   ),
                                                 ),
-                                              if (food.isOutStock == true)
-                                                Positioned(
-                                                  bottom: 0,
-                                                  child: Text(
-                                                    'Sold Out',
-                                                    style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: orientation ==
-                                                              Orientation
-                                                                  .landscape
-                                                          ? 2.5.h
-                                                          : 2.h,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                SizedBox(height: 0.5.h),
+                                                if (food.isOutStock == false)
+                                                  Positioned(
+                                                    bottom: 0,
+                                                    child: Text(
+                                                      '\$${food.foodPrice.toString()}',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: fontz * 0.7,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                            ],
+                                                if (food.isOutStock == true)
+                                                  Positioned(
+                                                    bottom: 0,
+                                                    child: Text(
+                                                      'Sold Out',
+                                                      style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: fontz * 0.7,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        decoration: orientation ==
+                                                                Orientation
+                                                                    .landscape
+                                                            ? TextDecoration
+                                                                .underline
+                                                            : TextDecoration
+                                                                .none,
+                                                        decorationThickness: 2,
+                                                        decorationColor: Colors
+                                                            .red, // สีของการตกแต่ง
+                                                      ),
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          if (isLastItem)
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: SizedBox(
+                                  height: screenHeight *
+                                      0.5, // Adjust height as needed
+                                  child: Container(
+                                    color: Colors
+                                        .transparent, // Optional background color
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            ),
                         ],
                       );
                     },

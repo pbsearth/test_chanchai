@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_flutter/screens/FirstPage/Widgets/contact_horizon_first.dart';
 import 'package:test_flutter/screens/MenuPage/presentation/menu_page.dart';
-import 'package:test_flutter/screens/MenuPage/presentation/menupage.dart';
 import 'package:test_flutter/screens/check_second_display.dart';
 
 class FirstPageHorizontal extends StatefulWidget {
@@ -125,7 +124,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MenuPage()),
+                                    builder: (context) => const MenuPage()),
                               );
                             },
                             child: Container(
@@ -169,7 +168,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                       ),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 10,
                             height: (screenHeight - necscreen) * 0.34,
                             // color: Colors.amber,
