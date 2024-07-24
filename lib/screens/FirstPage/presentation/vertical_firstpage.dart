@@ -29,13 +29,6 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
             double plusscreen2 =
                 screenHeight + (screenWidth * 0.3 - screenHeight);
             double fontPlus2 = plusscreen2 * 2;
-            // double necscreenabs = necscreen.abs();
-            // print('screenHeight : ${screenHeight}');
-            // print('screenWidth : ${screenWidth}');
-            // print('plusscreen : ${plusscreen}');
-            // print('necscreen : ${necscreen}');
-            // print('necscreenabs : ${necscreenabs}');
-            // print('new : ${screenHeight - necscreenabs}');
 
             return Stack(
               children: [
@@ -54,7 +47,6 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                           SizedBox(
                             width: 10,
                             height: (screenHeight - necscreen) * 0.57,
-                            // color: Colors.amber,
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -88,7 +80,6 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                                 SizedBox(
                                   width: plusscreen * 0.01,
                                   height: 10,
-                                  // color: Colors.amber,
                                 )
                               ],
                             ),

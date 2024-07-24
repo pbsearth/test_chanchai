@@ -25,7 +25,6 @@ class _ContactFirstHorizonState extends State<ContactFirstHorizon> {
         showModalBottomSheet(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
-            // maxHeight: MediaQuery.of(context).size.height * 0.183,
           ),
           context: context,
           builder: (BuildContext context) {

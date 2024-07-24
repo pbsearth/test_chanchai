@@ -57,7 +57,7 @@ class _WidgetSecondPageState extends State<WidgetSecondPage> {
                         BoxShadow(
                           color: Colors.grey,
                           blurRadius: 5,
-                          offset: Offset(1, 5), // Shadow position
+                          offset: Offset(1, 5),
                         ),
                       ],
                     ),

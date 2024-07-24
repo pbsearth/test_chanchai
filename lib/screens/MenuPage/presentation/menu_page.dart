@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_flutter/screens/MenuPage/widgets/foodlist.dart';
+import 'package:test_flutter/screens/MenuPage/widgets/food_tab.dart';
 import 'package:test_flutter/screens/MenuPage/widgets/order.dart';
+import 'package:test_flutter/screens/MenuPage/widgets/search_grid.dart';
 import 'package:test_flutter/screens/bloc/bloc_foodlist/foodlist_bloc.dart';
 import 'package:test_flutter/screens/domain/domain_foodlist/models/model_food.dart';
 
@@ -79,9 +80,9 @@ class _MenuPageState extends State<MenuPage> {
       double screenWidth,
       double plusscreen,
       double fontz) {
-    if (filteredFoodList.isEmpty) {
-      filteredFoodList = state.foodList;
-    }
+    // final currentFoodList =
+    //     textController.text.isEmpty ? state.foodList : filteredFoodList;
+
     return OrientationBuilder(builder: (context, orientation) {
       return Row(
         children: [
@@ -96,12 +97,17 @@ class _MenuPageState extends State<MenuPage> {
                   buildTopRow(screenWidth, screenHeight, plusscreen, fontz),
                   Expanded(
                     flex: 6,
-                    child: AllMenu(
-                      foodList: filteredFoodList,
-                      foodSets: state.foodSetList,
-                      foodcat: state.foodCategoryList,
-                      onFoodSelected: onFoodSelected,
-                    ),
+                    child: textController.text.isEmpty
+                        ? AllMenu(
+                            // foodList: state.foodList,
+                            // foodSets: state.foodSetList,
+                            // foodcat: state.foodCategoryList,
+                            onFoodSelected: onFoodSelected,
+                          )
+                        : SearchResultsGrid(
+                            filteredFoodList: filteredFoodList,
+                            onFoodSelected: onFoodSelected,
+                          ),
                   ),
                 ],
               ),
@@ -184,8 +190,7 @@ class _MenuPageState extends State<MenuPage> {
   Widget buildSearchBar(double screenWidth, double screenHeight,
       double plusscreen, double fontz) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: plusscreen * 0.05, vertical: plusscreen * 0.05),
+      padding: EdgeInsets.fromLTRB(2, plusscreen * 0.07, plusscreen * 0.1, 0),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         width: _isSearchExpanded ? screenWidth * 0.4 : plusscreen * 0.2,
@@ -240,7 +245,7 @@ class _MenuPageState extends State<MenuPage> {
                           focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
                           ),
-                          hintText: 'Search...',
+                          hintText: 'Search',
                           hintStyle: GoogleFonts.roboto(
                               fontSize: fontz * 0.8,
                               color: const Color(0xFF7b7b7b),
@@ -295,9 +300,10 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   void _onSearchChanged(String query) {
+    final allFoodList =
+        (context.read<FoodBloc>().state as FoodSuccess).foodList;
     setState(() {
-      filteredFoodList = (context.read<FoodBloc>().state as FoodSuccess)
-          .foodList
+      filteredFoodList = allFoodList
           .where((food) =>
               food.foodName?.toLowerCase().contains(query.toLowerCase()) ??
               false)
@@ -314,21 +320,6 @@ class _MenuPageState extends State<MenuPage> {
     });
   }
 
-  // void _onUpdateFoodQuantity(String foodId, bool isIncrement) {
-  //   setState(() {
-  //     if (isIncrement) {
-  //       foodQuantities[foodId] = (foodQuantities[foodId] ?? 0) + 1;
-  //     } else {
-  //       if (foodQuantities[foodId]! > 1) {
-  //         foodQuantities[foodId] = (foodQuantities[foodId]! - 1);
-  //       } else {
-  //         _onRemoveFoodItem(foodId);
-  //         return;
-  //       }
-  //     }
-  //     _updateSubtotalAndOrderCount();
-  //   });
-  // }
   void _onUpdateFoodQuantity(Food foodItem, int quantity) {
     setState(() {
       foodQuantities[foodItem.foodId.toString()] = quantity;

@@ -18,11 +18,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FoodBloc>(
-          create: (context) => getIt<FoodBloc>()..add(FetchFoodDataEvent()),
+          create: (context) => getIt<FoodBloc>()
+            ..add(const FetchFoodDataEvent(selectedSetId: '', searchQuery: '')),
         ),
       ],
       child: ResponsiveSizer(
-        builder: (BuildContext, Orientation, ScreenType) {
+        builder: (BuildContext context, Orientation orientation,
+            ScreenType screenType) {
           return MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,

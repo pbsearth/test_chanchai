@@ -1,4 +1,3 @@
-// order_summary.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +38,7 @@ class OrderSummary extends StatelessWidget {
             left: 0,
             top: plusscreen * 0.4,
             child: Container(
-              height: screenHeight * 0.8,
+              height: screenHeight * 0.7,
               width: double.infinity,
               color: Colors.white,
               child: SingleChildScrollView(
@@ -109,10 +108,6 @@ class OrderSummary extends StatelessWidget {
                         height: fontz * 1,
                         width: fontz * 1,
                       ),
-                      // Icon(
-                      //   Icons.edit_square,
-                      //   size: fontz * 1.2,
-                      // )
                     ],
                   ),
                   const Divider(
@@ -199,8 +194,8 @@ class OrderSummary extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Column(
-      children: selectedFoodItems.map(
+    return Column(children: [
+      ...selectedFoodItems.map(
         (foodItem) {
           final foodId = foodItem.foodId.toString();
           final quantity = foodQuantities[foodId] ?? 0;
@@ -212,7 +207,6 @@ class OrderSummary extends StatelessWidget {
                   horizontal: plusscreen * 0.05, vertical: plusscreen * 0.05),
               width: double.infinity,
               decoration: BoxDecoration(
-                // color: Colors.amber,
                 color: const Color(0xFFf6f6f6),
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -304,7 +298,8 @@ class OrderSummary extends StatelessWidget {
             ),
           );
         },
-      ).toList(),
-    );
+      ),
+      SizedBox(height: plusscreen * 0.5),
+    ]);
   }
 }
