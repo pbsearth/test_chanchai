@@ -172,8 +172,9 @@ class FoodGrid extends StatelessWidget {
                                     right: 0,
                                     bottom: 0,
                                     child: Container(
-                                      padding:
-                                          EdgeInsets.all(plusscreen * 0.05),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: plusscreen * 0.03,
+                                          horizontal: plusscreen * 0.06),
                                       decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.vertical(
@@ -200,52 +201,50 @@ class FoodGrid extends StatelessWidget {
                                             top: 0,
                                             child: Text(
                                               food.foodName ?? 'No Name',
-                                              style: TextStyle(
+                                              style: GoogleFonts.roboto(
                                                 color: Colors.black,
-                                                fontSize: fontz * 0.7,
+                                                fontSize: fontz * 0.6,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                           ),
                                           Positioned(
-                                            top: plusscreen * 0.1,
+                                            top: plusscreen * 0.09,
                                             child: Text(
                                               food.foodDesc!,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: fontz * 0.6,
+                                              style: GoogleFonts.roboto(
+                                                color: Colors.grey,
+                                                fontSize: fontz * 0.5,
                                               ),
                                             ),
                                           ),
-                                          SizedBox(height: 0.5.h),
-                                          if (food.isOutStock == false)
-                                            Positioned(
-                                              bottom: 0,
-                                              child: Text(
-                                                '\$${food.foodPrice.toString()}',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: fontz * 0.7,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                          Positioned(
+                                            bottom: 0,
+                                            child: Text(
+                                              food.isOutStock == false
+                                                  ? '\$${food.foodPrice.toString()}'
+                                                  : 'Sold Out',
+                                              style: GoogleFonts.roboto(
+                                                color: food.isOutStock == false
+                                                    ? Colors.black
+                                                    : Colors.red,
+                                                decoration: food.isOutStock ==
+                                                        false
+                                                    ? TextDecoration.none
+                                                    : TextDecoration.underline,
+                                                decorationThickness:
+                                                    food.isOutStock == false
+                                                        ? 0
+                                                        : 2,
+                                                decorationColor:
+                                                    food.isOutStock == false
+                                                        ? Colors.transparent
+                                                        : Colors.red,
+                                                fontSize: fontz * 0.6,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                          if (food.isOutStock == true)
-                                            Positioned(
-                                              bottom: 0,
-                                              child: Text(
-                                                'Sold Out',
-                                                style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: fontz * 0.7,
-                                                  fontWeight: FontWeight.bold,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationThickness: 2,
-                                                  decorationColor: Colors.red,
-                                                ),
-                                              ),
-                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),

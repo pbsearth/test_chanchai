@@ -20,11 +20,32 @@ class FetchFoodDataEvent extends FoodEvent {
   List<Object?> get props => [selectedSetId, searchQuery];
 }
 
-// abstract class FoodEvent extends Equatable {
-//   const FoodEvent();
+class AddFoodToOrderEvent extends FoodEvent {
+  final Food food;
 
-//   @override
-//   List<Object?> get props => [];
-// }
+  const AddFoodToOrderEvent(this.food);
 
-// class FetchFoodDataEvent extends FoodEvent {}
+  @override
+  List<Object> get props => [food];
+}
+
+class RemoveFoodFromOrderEvent extends FoodEvent {
+  final Food food;
+
+  const RemoveFoodFromOrderEvent(this.food);
+
+  @override
+  List<Object> get props => [food];
+}
+
+class UpdateFoodQuantityEvent extends FoodEvent {
+  final Food food;
+  final int quantity;
+
+  const UpdateFoodQuantityEvent(this.food, this.quantity);
+
+  @override
+  List<Object> get props => [food, quantity];
+}
+
+class CalculateSubtotalEvent extends FoodEvent {}

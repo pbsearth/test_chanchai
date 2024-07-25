@@ -67,32 +67,32 @@ class _ContactSecondVerticalState extends State<ContactSecondVertical> {
                                 children: [
                                   SvgPicture.asset(
                                     'assets/svg/phone_icon.svg',
-                                    height: 10 + fontPlus2 * 0.0005,
-                                    width: 10 + fontPlus2 * 0.0005,
+                                    height: 20 + fontPlus2 * 0.0005,
+                                    width: 20 + fontPlus2 * 0.0005,
                                   ),
                                   SizedBox(
                                     height: 3 + fontPlus2 * 0.025,
                                   ),
                                   SvgPicture.asset(
                                     'assets/svg/instagram_icon.svg',
-                                    height: 10 + fontPlus2 * 0.005,
-                                    width: 10 + fontPlus2 * 0.005,
+                                    height: 20 + fontPlus2 * 0.005,
+                                    width: 20 + fontPlus2 * 0.005,
                                   ),
                                   SizedBox(
                                     height: 3 + fontPlus2 * 0.025,
                                   ),
                                   SvgPicture.asset(
                                     'assets/svg/youtube_icon.svg',
-                                    height: 10 + fontPlus2 * 0.0005,
-                                    width: 10 + fontPlus2 * 0.0005,
+                                    height: 20 + fontPlus2 * 0.0005,
+                                    width: 20 + fontPlus2 * 0.0005,
                                   ),
                                   SizedBox(
                                     height: 3 + fontPlus2 * 0.025,
                                   ),
                                   SvgPicture.asset(
                                     'assets/svg/mail_icon.svg',
-                                    height: 10 + fontPlus2 * 0.0005,
-                                    width: 10 + fontPlus2 * 0.0005,
+                                    height: 20 + fontPlus2 * 0.0005,
+                                    width: 20 + fontPlus2 * 0.0005,
                                   ),
                                 ],
                               ),

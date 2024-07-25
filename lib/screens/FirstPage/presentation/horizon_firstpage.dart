@@ -30,11 +30,6 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
             Expanded(
               child: Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: fontPlus * 0.1, horizontal: fontPlus * 0.15),
-                    child: const ContactFirstHorizon(),
-                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Stack(
@@ -120,7 +115,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                     child: Image.asset(
                       'assets/image/vector_backgroud3.png',
                       fit: BoxFit.fill,
-                      scale: 2.3,
+                      // scale: 2,
                     ),
                   ),
                   Row(
@@ -128,7 +123,7 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                       Expanded(
                         flex: 4,
                         child: SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -229,6 +224,11 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                   ),
                 ],
               ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: fontPlus * 0.1, horizontal: fontPlus * 0.15),
+              child: const ContactFirstHorizon(),
             ),
           ],
         );

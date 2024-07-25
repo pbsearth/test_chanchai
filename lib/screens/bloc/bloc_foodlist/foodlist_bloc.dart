@@ -35,13 +35,62 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
           foodCategoryList: foodCategoryList,
           foodSetList: foodSetList,
           groupedFood: groupedFood,
+          order: {},
+          subtotal: 0.0,
         ));
       } catch (e) {
         emit(FoodError(message: e.toString()));
       }
     });
-  }
 
+    on<AddFoodToOrderEvent>((event, emit) {
+      if (state is FoodSuccess) {
+        final currentState = state as FoodSuccess;
+        final updatedOrder = Map<Food, int>.from(currentState.order);
+        if (updatedOrder.containsKey(event.food)) {
+          updatedOrder[event.food] = updatedOrder[event.food]! + 1;
+        } else {
+          updatedOrder[event.food] = 1;
+        }
+        emit(currentState.copyWith(order: updatedOrder));
+        add(CalculateSubtotalEvent());
+      }
+    });
+
+    on<RemoveFoodFromOrderEvent>((event, emit) {
+      if (state is FoodSuccess) {
+        final currentState = state as FoodSuccess;
+        final updatedOrder = Map<Food, int>.from(currentState.order);
+        updatedOrder.remove(event.food);
+        emit(currentState.copyWith(order: updatedOrder));
+        add(CalculateSubtotalEvent());
+      }
+    });
+
+    on<UpdateFoodQuantityEvent>((event, emit) {
+      if (state is FoodSuccess) {
+        final currentState = state as FoodSuccess;
+        final updatedOrder = Map<Food, int>.from(currentState.order);
+        if (event.quantity > 0) {
+          updatedOrder[event.food] = event.quantity;
+        } else {
+          updatedOrder.remove(event.food);
+        }
+        emit(currentState.copyWith(order: updatedOrder));
+        add(CalculateSubtotalEvent());
+      }
+    });
+
+    on<CalculateSubtotalEvent>((event, emit) {
+      if (state is FoodSuccess) {
+        final currentState = state as FoodSuccess;
+        final subtotal = currentState.order.entries
+            .map((entry) => entry.key.foodPrice! * entry.value)
+            .reduce((value, element) => value + element);
+        emit(currentState.copyWith(subtotal: subtotal));
+      }
+    });
+  }
   List<Food> _filterFoodList(
       List<Food> foodList, String selectedSetId, String searchQuery) {
     return foodList.where((food) {
@@ -87,24 +136,3 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     return sortedGroupedFood;
   }
 }
-
-
-// class FoodBloc extends Bloc<FoodEvent, FoodState> {
-//   final FoodRepository foodRepository;
-
-//   FoodBloc(this.foodRepository) : super(FoodInitial()) {
-//     on<FetchFoodDataEvent>((event, emit) async {
-//       emit(FoodLoading());
-//       try {
-//         final foodEntity = await foodRepository.fetchFoodData();
-//         emit(FoodSuccess(
-//           foodList: foodEntity.result?.food ?? [],
-//           foodCategoryList: foodEntity.result?.foodCategory ?? [],
-//           foodSetList: foodEntity.result?.foodSet ?? [],
-//         ));
-//       } catch (e) {
-//         emit(FoodError(message: e.toString()));
-//       }
-//     });
-//   }
-// }

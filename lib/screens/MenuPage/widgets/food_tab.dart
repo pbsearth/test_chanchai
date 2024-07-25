@@ -81,13 +81,22 @@ class _AllMenuState extends State<AllMenu> with SingleTickerProviderStateMixin {
     }
   }
 
-  void _scrollToCategory(String categoryName) {
+  void _scrollToCategory(String categoryName) async {
     final state = context.read<FoodBloc>().state;
     if (state is FoodSuccess) {
-      final index = state.groupedFood.keys.toList().indexOf(categoryName);
-      if (index != -1) {
-        _scrollController.scrollTo(
-            index: index, duration: const Duration(milliseconds: 300));
+      final categoryNames = state.groupedFood.keys.toList();
+      final targetIndex = categoryNames.indexOf(categoryName);
+      final currentIndex =
+          _itemPositionsListener.itemPositions.value.first.index;
+
+      if (targetIndex != -1) {
+        final step = (targetIndex > currentIndex) ? 1 : -1;
+        for (int i = currentIndex; i != targetIndex; i += step) {
+          await _scrollController.scrollTo(
+            index: i + step,
+            duration: const Duration(milliseconds: 100),
+          );
+        }
       }
     }
   }

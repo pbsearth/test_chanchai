@@ -191,7 +191,7 @@ class _SecondPageHorizontalState extends State<SecondPageHorizontal> {
                                 SizedBox(height: screenHeight * 0.05),
                                 WidgetSecondPage(
                                   height: screenHeight * 0.4,
-                                  width: screenWidth * 0.2,
+                                  width: screenWidth * 0.25,
                                   bottom1: screenHeight * 0.025,
                                   bottom2: screenHeight * 0.04,
                                   font: 0.025,

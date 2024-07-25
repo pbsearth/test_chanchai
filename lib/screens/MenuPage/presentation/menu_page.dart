@@ -107,6 +107,7 @@ class _MenuPageState extends State<MenuPage> {
                             },
                           )
                         : SearchResultsGrid(
+                            groupedFood2: state.groupedFood,
                             filteredFoodList: filteredFoodList,
                             onFoodSelected: onFoodSelected,
                           ),
@@ -126,13 +127,14 @@ class _MenuPageState extends State<MenuPage> {
               selectedFoodItems: selectedFoodItems,
               foodQuantities: foodQuantities,
               subtotal: subtotal,
-              countorder: countorder,
+              // countorder: countorder,
               onRemoveFoodItem: (Food foodItem) {
                 _onRemoveFoodItem(foodItem.foodId.toString());
               },
               onUpdateFoodQuantity: (Food foodItem, int quantity) {
                 _onUpdateFoodQuantity(foodItem, quantity);
               },
+              countOrder: countorder,
             ),
           ),
         ],

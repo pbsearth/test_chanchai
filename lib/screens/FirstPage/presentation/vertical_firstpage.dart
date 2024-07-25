@@ -98,7 +98,7 @@ class _FristPageVerticalState extends State<FirstPageVertical> {
                     Stack(
                       children: [
                         Positioned(
-                          top: 0,
+                          top: -50,
                           right: 0,
                           child: SizedBox(
                             height: screenHeight * 0.55,

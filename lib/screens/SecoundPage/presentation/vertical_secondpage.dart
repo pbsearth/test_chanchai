@@ -101,8 +101,9 @@ class _SecondPageVerticalState extends State<SecondPageVertical> {
                       child: SizedBox(
                         child: Image.asset(
                           'assets/image/vector_backgroud2.png',
-                          scale: plusscreen * 0.001 * 2,
+                          scale: plusscreen * 0.0003,
                           fit: BoxFit.cover,
+                          // color: Colors.amber,
                         ),
                       ),
                     ),
