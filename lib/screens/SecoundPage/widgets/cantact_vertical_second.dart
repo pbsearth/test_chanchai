@@ -16,6 +16,7 @@ class _ContactSecondVerticalState extends State<ContactSecondVertical> {
     double screenWidth = MediaQuery.of(context).size.width;
     double plusscreen2 = screenHeight + (screenWidth * 0.3 - screenHeight);
     double plusscreen = screenHeight + screenWidth;
+    double fontPlus4 = plusscreen2 * 0.1;
 
     double fontPlus2 = plusscreen2 * 2;
     double fontPlus3 = plusscreen2 * 5;
@@ -57,100 +58,109 @@ class _ContactSecondVerticalState extends State<ContactSecondVertical> {
                     Expanded(
                       flex: 4,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                          SizedBox(
+                              height: fontPlus4 * 1,
+                              width: fontPlus4 * 10,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SvgPicture.asset(
                                     'assets/svg/phone_icon.svg',
-                                    height: 20 + fontPlus2 * 0.0005,
-                                    width: 20 + fontPlus2 * 0.0005,
+                                    height: fontPlus4 * 1,
                                   ),
                                   SizedBox(
-                                    height: 3 + fontPlus2 * 0.025,
+                                    width: fontPlus4 * 1,
                                   ),
-                                  SvgPicture.asset(
-                                    'assets/svg/instagram_icon.svg',
-                                    height: 20 + fontPlus2 * 0.005,
-                                    width: 20 + fontPlus2 * 0.005,
-                                  ),
-                                  SizedBox(
-                                    height: 3 + fontPlus2 * 0.025,
-                                  ),
-                                  SvgPicture.asset(
-                                    'assets/svg/youtube_icon.svg',
-                                    height: 20 + fontPlus2 * 0.0005,
-                                    width: 20 + fontPlus2 * 0.0005,
-                                  ),
-                                  SizedBox(
-                                    height: 3 + fontPlus2 * 0.025,
-                                  ),
-                                  SvgPicture.asset(
-                                    'assets/svg/mail_icon.svg',
-                                    height: 20 + fontPlus2 * 0.0005,
-                                    width: 20 + fontPlus2 * 0.0005,
+                                  Text(
+                                    "090-890-xxxx",
+                                    style: TextStyle(
+                                        fontSize: 1 + fontPlus2 * 0.02,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    maxLines: null,
                                   ),
                                 ],
-                              ),
-                              SizedBox(
-                                width: screenWidth * 0.02,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "090-890-xxxx",
-                                      style: TextStyle(
-                                          fontSize: 1 + fontPlus2 * 0.02,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: null,
-                                    ),
-                                    SizedBox(
-                                      height: 3 + fontPlus2 * 0.025,
-                                    ),
-                                    Text(
-                                      "SoiSiam",
-                                      style: TextStyle(
-                                          fontSize: 1 + fontPlus2 * 0.02,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: null,
-                                    ),
-                                    SizedBox(
-                                      height: 3 + fontPlus2 * 0.025,
-                                    ),
-                                    Text(
-                                      "SoiSiam Chanal",
-                                      style: TextStyle(
-                                          fontSize: 1 + fontPlus2 * 0.02,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: null,
-                                    ),
-                                    SizedBox(
-                                      height: 3 + fontPlus2 * 0.025,
-                                    ),
-                                    Text(
-                                      "SoiSiam@gmail.co.th",
-                                      style: TextStyle(
-                                          fontSize: 1 + fontPlus2 * 0.02,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: null,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                              )),
+                          SizedBox(
+                            height: fontPlus4 * 0.2,
                           ),
+                          SizedBox(
+                              height: fontPlus4 * 1,
+                              width: fontPlus4 * 10,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/svg/instagram_icon.svg',
+                                    height: fontPlus4 * 1,
+                                  ),
+                                  SizedBox(
+                                    width: fontPlus4 * 1,
+                                  ),
+                                  Text(
+                                    "SoiSiam",
+                                    style: TextStyle(
+                                        fontSize: 1 + fontPlus2 * 0.02,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    maxLines: null,
+                                  ),
+                                ],
+                              )),
+                          SizedBox(
+                            height: fontPlus4 * 0.2,
+                          ),
+                          SizedBox(
+                              height: fontPlus4 * 1,
+                              width: fontPlus4 * 10,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/svg/youtube_icon.svg',
+                                    height: fontPlus4 * 1,
+                                  ),
+                                  SizedBox(
+                                    width: fontPlus4 * 1,
+                                  ),
+                                  Text(
+                                    "SoiSiam Chanal",
+                                    style: TextStyle(
+                                        fontSize: 1 + fontPlus2 * 0.02,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    maxLines: null,
+                                  ),
+                                ],
+                              )),
+                          SizedBox(
+                            height: fontPlus4 * 0.2,
+                          ),
+                          SizedBox(
+                              height: fontPlus4 * 1,
+                              width: fontPlus4 * 10,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/svg/mail_icon.svg',
+                                    height: fontPlus4 * 1,
+                                  ),
+                                  SizedBox(
+                                    width: fontPlus4 * 1,
+                                  ),
+                                  Text(
+                                    "SoiSiam@gmail.co.th",
+                                    style: TextStyle(
+                                        fontSize: 1 + fontPlus2 * 0.02,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    maxLines: null,
+                                  ),
+                                ],
+                              )),
                         ],
                       ),
                     ),

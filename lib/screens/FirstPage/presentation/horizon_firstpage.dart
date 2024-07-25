@@ -225,10 +225,13 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: fontPlus * 0.1, horizontal: fontPlus * 0.15),
-              child: const ContactFirstHorizon(),
+            SizedBox(
+              width: plusscreen * 0.2,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: fontPlus * 0.1, horizontal: fontPlus * 0.15),
+                child: const ContactFirstHorizon(),
+              ),
             ),
           ],
         );
