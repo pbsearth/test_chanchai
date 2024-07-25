@@ -55,11 +55,13 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                               SizedBox(
                                 width: plusscreen * 0.005,
                               ),
-                              Text(
-                                'Soi Siam',
-                                style: GoogleFonts.rasa(
-                                  fontSize: 1 + fontPlus2 * 0.035,
-                                  color: Colors.white,
+                              Flexible(
+                                child: Text(
+                                  'Soi Siam',
+                                  style: GoogleFonts.rasa(
+                                    fontSize: 1 + fontPlus2 * 0.035,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
@@ -68,41 +70,36 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation1, animation2) =>
-                                        const OrientationSecoundPage(),
-                                transitionDuration: const Duration(seconds: 0),
-                                maintainState: false,
-                              ),
-                            );
-                          },
-                          child: Flexible(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: fontPlus * 0.1,
-                                  horizontal: fontPlus * 0.15),
-                              height: 2 + fontPlus * 0.13,
-                              width: 2 + fontPlus * 0.13,
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/image/usa_flag_new.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                const OrientationSecoundPage(),
+                            transitionDuration: const Duration(seconds: 0),
+                            maintainState: false,
+                          ),
+                        );
+                      },
+                      child: Flexible(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                              vertical: fontPlus * 0.1,
+                              horizontal: fontPlus * 0.15),
+                          height: 2 + fontPlus * 0.13,
+                          width: 2 + fontPlus * 0.13,
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/image/usa_flag_new.png',
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   )
                 ],
               ),
