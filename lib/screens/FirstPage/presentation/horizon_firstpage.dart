@@ -30,6 +30,11 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
             Expanded(
               child: Stack(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: fontPlus * 0.1, horizontal: fontPlus * 0.15),
+                    child: const ContactFirstHorizon(),
+                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Stack(
@@ -123,15 +128,10 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                       Expanded(
                         flex: 4,
                         child: SingleChildScrollView(
+                          physics: NeverScrollableScrollPhysics(),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: fontPlus * 0.1,
-                                    horizontal: fontPlus * 0.15),
-                                child: const ContactFirstHorizon(),
-                              ),
                               SizedBox(
                                 height: plusscreen * 0.025,
                               ),
@@ -219,9 +219,6 @@ class _FirstPageHorizontalState extends State<FirstPageHorizontal> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: plusscreen * 0.1,
                               ),
                             ],
                           ),

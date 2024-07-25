@@ -17,32 +17,20 @@ class _SecondPageVerticalState extends State<SecondPageVertical> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            double screenHeight = MediaQuery.of(context).size.height;
-            double screenWidth = MediaQuery.of(context).size.width;
-            double plusscreen = screenHeight + screenWidth;
-            double fontPlus = plusscreen * 0.1;
-            double plusscreen2 =
-                screenHeight + (screenWidth * 0.3 - screenHeight);
-            double fontPlus2 = plusscreen2 * 2;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenHeight = MediaQuery.of(context).size.height;
+          double screenWidth = MediaQuery.of(context).size.width;
+          double plusscreen = screenHeight + screenWidth;
+          double fontPlus = plusscreen * 0.1;
+          double plusscreen2 =
+              screenHeight + (screenWidth * 0.3 - screenHeight);
+          double fontPlus2 = plusscreen2 * 2;
 
-            return Stack(
-              children: [
-                Positioned(
-                  top: screenHeight * 0.2,
-                  left: 0,
-                  child: SizedBox(
-                    child: Image.asset(
-                      'assets/image/vector_backgroud2.png',
-                      scale: plusscreen * 0.001 * 1.5,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Column(
+          return Stack(
+            children: [
+              Expanded(
+                child: Stack(
                   children: [
                     Container(
                       margin: EdgeInsets.symmetric(
@@ -101,84 +89,113 @@ class _SecondPageVerticalState extends State<SecondPageVertical> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: plusscreen * 0.05,
-                    ),
-                    Text(
-                      'Self-Service',
-                      style: GoogleFonts.rasa(
-                        fontSize: plusscreen * 0.037,
-                        fontWeight: FontWeight.bold,
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: screenHeight * 0.15,
+                      left: 0,
+                      child: SizedBox(
+                        child: Image.asset(
+                          'assets/image/vector_backgroud2.png',
+                          scale: plusscreen * 0.001 * 2,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Experience.',
-                      style: GoogleFonts.rasa(
-                        fontSize: plusscreen * 0.037,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: plusscreen * 0.0035,
-                    ),
-                    Text(
-                      'From self-order and self-checkout',
-                      style: GoogleFonts.roboto(
-                        fontSize: plusscreen * 0.0115,
-                        color: const Color(0xFF7D7D7D),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: plusscreen * 0.0035,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Column(
                       children: [
-                        ClipOval(
-                          child: SvgPicture.asset('assets/svg/credit_card.svg',
-                              fit: BoxFit.cover,
-                              height: plusscreen * 0.0115,
-                              width: plusscreen * 0.0115),
+                        SizedBox(
+                          height: plusscreen * 0.1,
+                        ),
+                        Text(
+                          'Self-Service',
+                          style: GoogleFonts.rasa(
+                            fontSize: plusscreen * 0.037,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Experience.',
+                          style: GoogleFonts.rasa(
+                            fontSize: plusscreen * 0.037,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         SizedBox(
-                          width: plusscreen * 0.005,
+                          height: plusscreen * 0.0035,
                         ),
-                        Flexible(
-                          child: Text(
-                            'Accept Credit Card Only',
-                            style: GoogleFonts.roboto(
-                                fontSize: plusscreen * 0.0115,
-                                color: const Color(0xFFEB5757),
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-                                decorationColor: const Color(0xFFEB5757)),
+                        Text(
+                          'From self-order and self-checkout',
+                          style: GoogleFonts.roboto(
+                            fontSize: plusscreen * 0.0115,
+                            color: const Color(0xFF7D7D7D),
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        SizedBox(
+                          height: plusscreen * 0.0035,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipOval(
+                              child: SvgPicture.asset(
+                                  'assets/svg/credit_card.svg',
+                                  fit: BoxFit.cover,
+                                  height: plusscreen * 0.0115,
+                                  width: plusscreen * 0.0115),
+                            ),
+                            SizedBox(
+                              width: plusscreen * 0.005,
+                            ),
+                            Flexible(
+                              child: Text(
+                                'Accept Credit Card Only',
+                                style: GoogleFonts.roboto(
+                                    fontSize: plusscreen * 0.0115,
+                                    color: const Color(0xFFEB5757),
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: const Color(0xFFEB5757)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: plusscreen * 0.03,
+                        ),
+                        WidgetSecondPage(
+                          height: screenHeight * 0.27,
+                          width: screenWidth * 0.42,
+                          bottom1: screenHeight * 0.045,
+                          bottom2: screenHeight * 0.045,
+                          font: 0.055,
+                          heighttext: screenHeight * 0.065,
+                        ),
+                        SizedBox(
+                          height: fontPlus * 0.7,
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: plusscreen * 0.03,
-                    ),
-                    WidgetSecondPage(
-                      height: screenHeight * 0.27,
-                      width: screenWidth * 0.42,
-                      bottom1: screenHeight * 0.045,
-                      bottom2: screenHeight * 0.045,
-                      font: 0.055,
-                      heighttext: screenHeight * 0.065,
-                    ),
-                    SizedBox(
-                      height: fontPlus * 0.7,
-                    ),
-                    const ContactSecondVertical()
                   ],
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+              const Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Stack(
+                    children: [ContactSecondVertical()],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
